@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PokeAPI — API Concepts Demo (Single HTML)</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#22d3ee; --accent2:#a78bfa; --danger:#f87171;
+    --chip:#1f2937; --card:#0b1220; --ok:#34d399; --warn:#fbbf24;
+  }
+  html,body{margin:0;height:100%;background:linear-gradient(180deg,#0b1020 0%, #0f172a 100%);color:var(--text);font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial}
+  h1,h2,h3{margin:0 0 .5rem 0}
+  .wrap{max-width:1200px;margin:0 auto;padding:20px}
+  header{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+  header h1{font-size:20px;letter-spacing:.3px}
+  header .badge{background:var(--chip);padding:4px 8px;border-radius:999px;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:340px 1fr;gap:16px}
+  .panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);overflow:hidden}
+  .panel .hd{padding:12px 14px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+  .panel .bd{padding:12px 14px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  input[type="search"]{flex:1;min-width:100px;background:#0b1220;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;color:var(--text);outline:none}
+  button{background:#172554;border:1px solid rgba(255,255,255,.1);color:#dbeafe;border-radius:10px;padding:9px 12px;cursor:pointer}
+  button:hover{filter:brightness(1.1)}
+  button[disabled]{opacity:.5;cursor:not-allowed}
+  .muted{color:var(--muted)}
+  .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center}
+  .card img{width:56px;height:56px;image-rendering:pixelated}
+  .card .nm{font-weight:600;text-transform:capitalize}
+  .card .chip{font-size:12px;background:#132036;padding:2px 6px;border-radius:999px;color:#bfdbfe;border:1px solid rgba(255,255,255,.08)}
+  .pagination{display:flex;gap:8px;justify-content:center;margin-top:8px}
+  .pill{display:inline-flex;gap:8px;align-items:center;background:var(--chip);border:1px solid rgba(255,255,255,.08);padding:6px 10px;border-radius:999px}
+  .kv{display:grid;grid-template-columns:120px 1fr;gap:6px;font-size:13px}
+  .kv .k{color:var(--muted)}
+  .pre{white-space:pre-wrap;word-break:break-word;background:#0a1020;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;font-size:12px;max-height:320px;overflow:auto}
+  .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+  .spinner{--s:18px;width:var(--s);height:var(--s);border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:var(--accent);animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .status{display:flex;align-items:center;gap:8px}
+  .status.ok{color:var(--ok)} .status.warn{color:var(--warn)} .status.err{color:var(--danger)}
+  .tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08);gap:6px}
+  .tabs button{background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;padding:10px 12px;color:var(--muted)}
+  .tabs button.active{color:var(--text);border-bottom-color:var(--accent)}
+  .tip{font-size:12px;color:var(--muted)}
+  .tiny{font-size:12px}
+  .badge2{background:#10222a;border:1px solid rgba(255,255,255,.08);color:#a7f3d0;padding:2px 6px;border-radius:999px}
+  .sr-only{position:absolute;left:-9999px}
+  @media (max-width:980px){ .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>How Web APIs Work — PokeAPI Demo</h1>
+      <span class="badge">GET requests • JSON • Pagination • Errors • Abort</span>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT: Controls & Results -->
+      <section class="panel" aria-label="Explorer">
+        <div class="hd">
+          <strong>Explorer</strong>
+          <div class="status" id="netStatus"><span class="spinner" style="display:none" id="globalSpinner"></span><span class="muted tiny">idle</span></div>
+        </div>
+        <div class="bd">
+          <div class="row" style="margin-bottom:8px">
+            <input id="search" type="search" placeholder="Search Pokémon by name (e.g. pikachu)" aria-label="Search Pokémon" />
+            <button id="btnSearch">Search</button>
+          </div>
+          <div class="row" style="margin-bottom:10px">
+            <span class="pill tiny">Endpoint: <code class="mono">/api/v2/pokemon</code></span>
+            <span class="pill tiny">Params: <code class="mono">?limit=&amp;offset=</code></span>
+          </div>
+
+          <div id="resultCount" class="muted tiny" style="margin-bottom:8px"></div>
+          <div id="cards" class="list" role="list"></div>
+          <div class="pagination">
+            <button id="prev" disabled>◀ Prev</button>
+            <button id="next" disabled>Next ▶</button>
+          </div>
+          <div class="tip" style="margin-top:10px">
+            Tip: Try typing while results load — we cancel in-flight requests with <code class="mono">AbortController</code>.
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Console -->
+      <section class="panel" aria-label="API Console">
+        <div class="hd"><strong>API Console</strong><span class="badge2 tiny" id="latency">— ms</span></div>
+        <div class="bd">
+          <div class="tabs" role="tablist" aria-label="Console tabs">
+            <button class="active" data-tab="req" role="tab" aria-selected="true">Request</button>
+            <button data-tab="res" role="tab" aria-selected="false">Response JSON</button>
+            <button data-tab="meta" role="tab" aria-selected="false">Response Meta</button>
+          </div>
+
+          <div id="tab-req" class="tab">
+            <div class="kv" style="margin:10px 0">
+              <div class="k">Method</div><div class="v"><code class="mono">GET</code></div>
+              <div class="k">URL</div><div class="v"><code class="mono" id="reqUrl">—</code></div>
+              <div class="k">Headers</div><div class="v"><code class="mono">Accept: application/json</code></div>
+            </div>
+            <div class="tip">We build the URL using query parameters like <code class="mono">limit</code> and <code class="mono">offset</code>.</div>
+          </div>
+
+          <div id="tab-res" class="tab" hidden>
+            <div class="pre" id="resJson">{}</div>
+          </div>
+
+          <div id="tab-meta" class="tab" hidden>
+            <div class="kv" id="resMeta" style="margin-top:10px"></div>
+            <div class="tip" style="margin-top:8px">Not all servers send rate-limit headers. This shows what we can read from a browser response.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- DETAILS DRAWER -->
+    <section class="panel" style="margin-top:16px" aria-label="Details">
+      <div class="hd">
+        <strong>Selected Pokémon</strong>
+        <span class="muted tiny">Demonstrates chaining requests: <code class="mono">pokemon → species</code></span>
+      </div>
+      <div class="bd" id="details">
+        <div class="muted">Select a card above to see details (sprites, types, stats, and flavor text).</div>
+      </div>
+    </section>
+
+    <footer style="margin-top:14px" class="muted tiny">
+      Built for teaching: APIs, HTTP, JSON, fetch, query params, pagination, errors, aborts, and response inspection. Data from <a href="https://pokeapi.co/" target="_blank" rel="noreferrer">PokeAPI</a>.
+    </footer>
+  </div>
+
+<script>
+(() => {
+  const API_BASE = "https://pokeapi.co/api/v2";
+  const state = {
+    limit: 12,
+    offset: 0,
+    next: null,
+    prev: null,
+    activeAbort: null,
+    lastLatencyMs: null,
+    lastResponse: null,
+    lastURL: null,
+  };
+
+  // Elements
+  const $ = s => document.querySelector(s);
+  const cards = $("#cards");
+  const searchInput = $("#search");
+  const btnSearch = $("#btnSearch");
+  const btnPrev = $("#prev");
+  const btnNext = $("#next");
+  const resultCount = $("#resultCount");
+  const reqUrl = $("#reqUrl");
+  const resJson = $("#resJson");
+  const resMeta = $("#resMeta");
+  const latency = $("#latency");
+  const status = $("#netStatus");
+  const globalSpinner = $("#globalSpinner");
+  const details = $("#details");
+
+  // Tabs
+  document.querySelectorAll(".tabs button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tabs button").forEach(b => {
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-selected", b === btn ? "true" : "false");
+      });
+      const id = btn.dataset.tab;
+      document.querySelectorAll(".tab").forEach(p => p.hidden = true);
+      $("#tab-" + id).hidden = false;
+    });
+  });
+
+  // Simple helpers
+  const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const ms = () => (performance || Date).now();
+
+  function setStatus(text, kind="") {
+    status.querySelector(".muted, span:not(.spinner)")?.replaceWith(Object.assign(document.createElement('span'), {className: kind ? `status ${kind}` : 'muted', textContent: text}));
+  }
+
+  function setLoading(isLoading){
+    globalSpinner.style.display = isLoading ? "inline-block" : "none";
+  }
+
+  function abortInFlight() {
+    if (state.activeAbort) {
+      try { state.activeAbort.abort(); } catch {}
+      state.activeAbort = null;
+    }
+  }
+
+  // Core fetch wrapper that records timing + fills console panel
+  async function fetchJSON(url, opts={}) {
+    abortInFlight();
+    const ac = new AbortController();
+    state.activeAbort = ac;
+    const t0 = ms();
+    setLoading(true);
+    setStatus("Loading...");
+    reqUrl.textContent = url;
+    state.lastURL = url;
+
+    try {
+      const res = await fetch(url, { ...opts, signal: ac.signal, headers: { Accept: "application/json" }});
+      const t1 = ms();
+      state.lastLatencyMs = Math.round(t1 - t0);
+      latency.textContent = `${state.lastLatencyMs} ms`;
+
+      // Fill meta panel
+      resMeta.innerHTML = "";
+      const kv = (k,v) => `<div class="k">${k}</div><div class="v"><code class="mono">${v}</code></div>`;
+      resMeta.insertAdjacentHTML("beforeend", kv("Status", `${res.status} ${res.statusText}`));
+      resMeta.insertAdjacentHTML("beforeend", kv("URL", res.url));
+      resMeta.insertAdjacentHTML("beforeend", kv("Type", res.type));
+      ["content-type","date","cache-control","x-ratelimit-limit","x-ratelimit-remaining","x-ratelimit-reset"].forEach(h=>{
+        const v = res.headers.get(h);
+        if (v) resMeta.insertAdjacentHTML("beforeend", kv(h, v));
+      });
+
+      if (!res.ok) {
+        setStatus(`Error ${res.status}`, "err");
+        const text = await res.text().catch(()=> "");
+        resJson.textContent = text || `{ "error": "Request failed" }`;
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      state.lastResponse = data;
+      resJson.textContent = JSON.stringify(data, null, 2);
+      setStatus("OK", "ok");
+      return data;
+    } finally {
+      setLoading(false);
+      state.activeAbort = null;
+    }
+  }
+
+  // Render list (either paginated list or a single search result)
+  async function loadList(limit=state.limit, offset=state.offset) {
+    const url = `${API_BASE}/pokemon?limit=${limit}&offset=${offset}`;
+    const data = await fetchJSON(url);
+    console.log("THE DATA",data)
+    state.next = data.next;
+    state.prev = data.previous;
+    btnNext.disabled = !state.next;
+    btnPrev.disabled = !state.prev;
+    resultCount.textContent = `Showing ${data.results.length} • Page offset ${offset}`;
+    renderCards(data.results);
+  }
+
+  function renderCards(items) {
+    cards.innerHTML = "";
+    if (!items || items.length === 0) {
+      cards.innerHTML = `<div class="muted">No results.</div>`;
+      return;
+    }
+    items.forEach(item => {
+      // item.name & item.url; sprite requires another call or we can infer id from URL
+      const id = item.url.match(/\/pokemon\/(\d+)\//)?.[1];
+      const img = id ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png` : "";
+      const card = document.createElement("div");
+      card.className = "card";
+      card.setAttribute("role","listitem");
+      card.innerHTML = `
+        <img alt="${item.name} sprite" src="${img}" />
+        <div style="min-width:0;flex:1">
+          <div class="nm">${item.name}</div>
+          <div class="muted tiny mono">${item.url.replace(API_BASE, "")}</div>
+          <div class="row" style="margin-top:6px">
+            <span class="chip tiny">id: ${id || "?"}</span>
+            <button class="tiny" data-name="${item.name}">Details</button>
+          </div>
+        </div>
+      `;
+      card.querySelector("button").addEventListener("click", () => showDetails(item.name));
+      cards.appendChild(card);
+    });
+  }
+
+  // Show details: pokemon → species (chained)
+  async function showDetails(name) {
+    details.innerHTML = `<div class="row"><span class="spinner"></span><span>Fetching <code class="mono">/pokemon/${name}</code>…</span></div>`;
+    try {
+      const poke = await fetchJSON(`${API_BASE}/pokemon/${encodeURIComponent(name.toLowerCase())}`);
+      console.log("poke", poke)
+      const species = await fetchJSON(`${API_BASE}/pokemon-species/${poke.id}`);
+
+      const flavor = (species.flavor_text_entries || []).find(f => f.language?.name === "en");
+      const types = poke.types.map(t => t.type.name).join(", ");
+      const stats = poke.stats.map(s => `<li>${s.stat.name}: <strong>${s.base_stat}</strong></li>`).join("");
+
+      details.innerHTML = `
+        <div class="row" style="align-items:flex-start">
+          <img src="${poke.sprites.front_default}" alt="${poke.name} sprite" style="width:96px;height:96px;image-rendering:pixelated;border:1px solid rgba(255,255,255,.1);border-radius:12px" />
+          <div style="flex:1;min-width:0">
+            <h2 style="text-transform:capitalize">${poke.name} <span class="muted tiny">#${poke.id}</span></h2>
+            <div class="kv" style="margin:8px 0">
+              <div class="k">Types</div><div class="v">${types}</div>
+              <div class="k">Height</div><div class="v">${poke.height} dm</div>
+              <div class="k">Weight</div><div class="v">${poke.weight} hg</div>
+              <div class="k">Base XP</div><div class="v">${poke.base_experience ?? "—"}</div>
+            </div>
+            <div>
+              <strong>Stats</strong>
+              <ul class="tiny" style="margin:6px 0 0 16px">${stats}</ul>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <strong>Flavor (from species):</strong>
+          <div class="pre" style="margin-top:6px">${flavor ? flavor.flavor_text.replace(/\f/g,' ') : "—"}</div>
+        </div>
+      `;
+    } catch (e) {
+      details.innerHTML = `<div class="status err">Could not load details. ${e?.message || e}</div>`;
+    }
+  }
+
+  // Search (by name)
+  async function searchByName(q) {
+    if (!q) return loadList(12, 0);
+    const url = `${API_BASE}/pokemon/${encodeURIComponent(q.toLowerCase())}`;
+    try {
+      const data = await fetchJSON(url);
+      // make a pseudo list result to reuse renderer
+      const item = { name: data.name, url: `${API_BASE}/pokemon/${data.id}/` };
+      resultCount.textContent = `1 match for “${q}”`;
+      btnNext.disabled = btnPrev.disabled = true;
+      renderCards([item]);
+    } catch (e) {
+      cards.innerHTML = `<div class="status err">No match for “${q}”.</div>`;
+      resJson.textContent ||= `{ "error": "Not found" }`;
+      resultCount.textContent = "";
+    }
+  }
+
+  // Debounce & Abort on type
+  let t;
+  searchInput.addEventListener("input", () => {
+    clearTimeout(t);
+    t = setTimeout(() => searchByName(searchInput.value.trim()), 300);
+  });
+  btnSearch.addEventListener("click", () => searchByName(searchInput.value.trim()));
+
+  // Pagination buttons call the URLs returned by the API (next/previous)
+  btnNext.addEventListener("click", async () => {
+    if (!state.next) return;
+    // Parse limit/offset from next URL so we stay in sync with API
+    const u = new URL(state.next);
+    state.limit = Number(u.searchParams.get("limit")) || state.limit;
+    state.offset = Number(u.searchParams.get("offset")) || (state.offset + state.limit);
+    await loadList(state.limit, state.offset);
+  });
+
+  btnPrev.addEventListener("click", async () => {
+    if (!state.prev) return;
+    const u = new URL(state.prev);
+    state.limit = Number(u.searchParams.get("limit")) || state.limit;
+    state.offset = Number(u.searchParams.get("offset")) || Math.max(0, state.offset - state.limit);
+    await loadList(state.limit, state.offset);
+  });
+
+  // Keyboard accessibility: Enter to search, Esc to reset
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") searchByName(searchInput.value.trim());
+    if (e.key === "Escape") {
+      searchInput.value = "";
+      loadList(12, 0);
+    }
+  });
+
+  // Initial load
+  loadList(12, 0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1630 @@
+{
+  "scrapedAt": "2025-09-18T23:43:54.276Z",
+  "total": 221,
+  "sources": [
+    {
+      "section": "Arts",
+      "url": "https://www.nytimes.com/section/arts",
+      "count": 18
+    },
+    {
+      "section": "Books",
+      "url": "https://www.nytimes.com/section/books",
+      "count": 21
+    },
+    {
+      "section": "Business",
+      "url": "https://www.nytimes.com/section/business",
+      "count": 18
+    },
+    {
+      "section": "Food",
+      "url": "https://www.nytimes.com/section/food",
+      "count": 20
+    },
+    {
+      "section": "Health",
+      "url": "https://www.nytimes.com/section/health",
+      "count": 21
+    },
+    {
+      "section": "Home",
+      "url": "https://www.nytimes.com/",
+      "count": 32
+    },
+    {
+      "section": "Magazine",
+      "url": "https://www.nytimes.com/section/magazine",
+      "count": 21
+    },
+    {
+      "section": "Opinion",
+      "url": "https://www.nytimes.com/section/opinion",
+      "count": 15
+    },
+    {
+      "section": "Politics",
+      "url": "https://www.nytimes.com/section/politics",
+      "count": 17
+    },
+    {
+      "section": "Science",
+      "url": "https://www.nytimes.com/section/science",
+      "count": 25
+    },
+    {
+      "section": "Sports",
+      "url": "https://www.nytimes.com/section/sports",
+      "count": 8
+    },
+    {
+      "section": "Technology",
+      "url": "https://www.nytimes.com/section/technology",
+      "count": 19
+    },
+    {
+      "section": "Travel",
+      "url": "https://www.nytimes.com/section/travel",
+      "count": 20
+    },
+    {
+      "section": "U.S.",
+      "url": "https://www.nytimes.com/section/us",
+      "count": 17
+    },
+    {
+      "section": "World",
+      "url": "https://www.nytimes.com/section/world",
+      "count": 21
+    }
+  ],
+  "headlines": [
+    {
+      "title": "‘Come From Away’ Will Be This Season’s Most Produced Show in the U.S.",
+      "url": "https://www.nytimes.com/2025/09/18/theater/come-from-away-most-produced-list.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "‘Demon Slayer’ Review: Arresting Visuals on a Familiar Battleground",
+      "url": "https://www.nytimes.com/2025/09/18/movies/demon-slayer-review.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "‘Plainclothes’ Review: The Trap of Desire",
+      "url": "https://www.nytimes.com/2025/09/18/movies/plainclothes-review.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "‘Predators’ Review: Busted for Social Good (and Maybe Ratings)",
+      "url": "https://www.nytimes.com/2025/09/18/movies/predators-review.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "‘Speak.’ Review: How to Debate Like a Pro",
+      "url": "https://www.nytimes.com/2025/09/18/movies/speak-review.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "‘The Senior’ Review: Just Like Old Times",
+      "url": "https://www.nytimes.com/2025/09/18/movies/the-senior-review.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "‘The Summer Book’ Review: Glenn Close’s Autumnal Notes",
+      "url": "https://www.nytimes.com/2025/09/18/movies/the-summer-book-review.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "36 Hours in Zadar, Croatia",
+      "url": "https://www.nytimes.com/interactive/2025/09/18/travel/things-to-do-zadar.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "A Group of Socialists Created a Hit Game That Tore Them Apart",
+      "url": "https://www.nytimes.com/interactive/2025/09/17/arts/disco-elysium-zaum-estonia.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "British Theater, Up Close on the Big Screen",
+      "url": "https://www.nytimes.com/2025/09/18/theater/nt-live-inter-alia.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "David Letterman Says Kimmel’s Suspension Is ‘Just Not How This Works’",
+      "url": "https://www.nytimes.com/2025/09/18/arts/television/jimmy-kimmel-david-letterman-stephen-colbert.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/arts#stream-panel",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "New York’s Art Stars of the 80’s, Curated by One of Their Own",
+      "url": "https://www.nytimes.com/2025/09/18/arts/design/new-york-art-80s-levy-gorvy-dayan.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "The Books We Loved This Summer",
+      "url": "https://www.nytimes.com/2025/09/18/books/summer-reading-bucket-list.html",
+      "section": "Arts",
+      "sourceUrl": "https://www.nytimes.com/section/arts",
+      "source": "dom"
+    },
+    {
+      "title": "8 New Books We Love This Week",
+      "url": "https://www.nytimes.com/2025/09/18/books/review/recommended-new-books.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "A Tart, Spicy Take on Our Ridiculous Foodie Culture",
+      "url": "https://www.nytimes.com/2025/09/17/books/review/all-consuming-ruby-tandoh.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "Books of the Times",
+      "url": "https://www.nytimes.com/column/books-of-the-times",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "Four Women, Navigating Friendship and Ambition in a World on Fire",
+      "url": "https://www.nytimes.com/2025/09/16/books/review/the-wilderness-angela-flournoy.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "In This Spanish Office, Work Is Hell. It’s Also Hilarious.",
+      "url": "https://www.nytimes.com/2025/09/18/books/review/discontent-beatriz-serrano.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "John Lithgow to Tackle Roald Dahl’s Antisemitism in Broadway ‘Giant’",
+      "url": "https://www.nytimes.com/2025/09/16/theater/lithgow-giant-dahl-broadway.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/books#stream-panel",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "Mark Ronson Strolls Through His D.J. Past",
+      "url": "https://www.nytimes.com/2025/09/17/style/mark-ronson-night-people.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "Patricia Lockwood Craves an Easier Way to Eat While Reading",
+      "url": "https://www.nytimes.com/2025/09/18/books/review/patricia-lockwood-will-there-ever-be-another-you.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "Sign Up for the Book Review Newsletter",
+      "url": null,
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "Sports Romance: A Starter Pack",
+      "url": "https://www.nytimes.com/2025/09/17/books/sports-romance-books.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "The Incurable Confidence of the Man Who Made Nobu",
+      "url": "https://www.nytimes.com/2025/09/16/dining/drew-nieporent-book-nobu.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "This Generation Will Always Have Main Character Energy",
+      "url": "https://www.nytimes.com/2025/09/17/books/review/what-happened-to-millennials-charlie-wells.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "What Happened in the 2024 Election? Kamala Harris Has Some Thoughts.",
+      "url": "https://www.nytimes.com/2025/09/18/books/review/107-days-kamala-harris.html",
+      "section": "Books",
+      "sourceUrl": "https://www.nytimes.com/section/books",
+      "source": "dom"
+    },
+    {
+      "title": "‘Tax the Rich,’ French Protesters Cry, as the Wealthy Push Back on Paying More",
+      "url": "https://www.nytimes.com/2025/09/18/business/france-tax-protest-gabriel-zucman-billionaires.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "Business Delivered to Your Inbox",
+      "url": null,
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "DealBook",
+      "url": null,
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "I.R.S. Official Sues the Agency, Saying It Leaked Private Data to News Sites",
+      "url": "https://www.nytimes.com/2025/09/18/business/irs-lawsuit-holly-paz-fox-news.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/business#stream-panel",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "Newark Airport Crisis Has Eased but Tech and Staffing Issues Persist",
+      "url": "https://www.nytimes.com/2025/09/18/business/newark-airport-air-traffic-control.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "Nvidia to Buy $5 Billion Stake in Intel, Giving Rival a Lifeline",
+      "url": "https://www.nytimes.com/2025/09/18/business/nvidia-intel-stake.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "The Business Decision Behind Taking Jimmy Kimmel Off Air",
+      "url": "https://www.nytimes.com/2025/09/18/business/dealbook/kimmel-disney-abc.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "The Fed Has No Good Options as Hiring Wobbles and Inflation Picks Up",
+      "url": "https://www.nytimes.com/2025/09/18/business/fed-interest-rates-labor-inflation.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "The New AirPods Can Translate Languages in Your Ears. This Is Profound.",
+      "url": "https://www.nytimes.com/2025/09/18/technology/personaltech/new-airpods-language-translation-feature.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "Trump Administration Wields Its Full Toolbox to Bring Media to Heel",
+      "url": "https://www.nytimes.com/2025/09/18/business/media/trump-kimmel-cancel-culture-free-speech.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "Trump Asks Supreme Court to Allow Removal of Fed Governor",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/trump-supreme-court-fed.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "U.S. Sues Ticketmaster Over Claims of Illegal Resale Tactics",
+      "url": "https://www.nytimes.com/2025/09/18/business/ticketmaster-ftc-suit.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "With Amex’s Platinum Refresh, an Even More Exclusive Card Emerges",
+      "url": "https://www.nytimes.com/2025/09/18/travel/amexs-platinum-card-benefits.html",
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "Your Money",
+      "url": null,
+      "section": "Business",
+      "sourceUrl": "https://www.nytimes.com/section/business",
+      "source": "dom"
+    },
+    {
+      "title": "20 Years Ago, Alinea Electrified Chicago Dining. Does It Still Matter?",
+      "url": "https://www.nytimes.com/2025/09/16/dining/restaurant-review-alinea-chicago.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "A $35 Chicken Dinner in Mississippi? How Big-City Prices Went National.",
+      "url": "https://www.nytimes.com/2025/09/18/dining/restaurant-prices.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "A Quick Shrimp Dinner for Long, Stumping Sundays",
+      "url": "https://www.nytimes.com/2025/09/14/dining/a-quick-shrimp-dinner-for-long-stumping-sundays.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Atlanta-Style Lemon-Pepper Wings for Game Day",
+      "url": "https://www.nytimes.com/2025/09/12/dining/atlanta-style-lemon-pepper-wings-for-game-day.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Can Hybrid Grapes Solve the Climate Change Dilemma for Wine Makers?",
+      "url": "https://www.nytimes.com/2025/09/18/dining/drinks/hybrid-grapes-wine.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Cocoa. Krispies. Treats.",
+      "url": "https://www.nytimes.com/2025/09/13/dining/cocoa-krispies-treats-and-more-fun-recipes.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Cooking Newsletter",
+      "url": null,
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Cool Whips",
+      "url": "https://www.nytimes.com/2025/09/18/dining/whipped-tofu-whipped-ricotta-and-more-whipped-recipes.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Is Paris Ready for Real Southern Cooking?",
+      "url": "https://www.nytimes.com/2025/09/17/dining/mashama-bailey-larret-paris-restaurant.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/food#stream-panel",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Lunching Like a Flower Child in the East Village",
+      "url": "https://www.nytimes.com/2025/09/18/dining/lunching-like-a-flower-child-in-the-east-village.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Marilyn Hagerty, Whose Olive Garden Review Went Viral, Dies at 99",
+      "url": "https://www.nytimes.com/2025/09/18/dining/marilyn-hagerty-dead.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Quesadillas That Cosplay as Elotes",
+      "url": "https://www.nytimes.com/2025/09/18/dining/quesadillas-that-cosplay-as-elotes.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "Shrimp in the Freezer Makes Meal Planning Easier",
+      "url": "https://www.nytimes.com/2025/09/16/dining/shrimp-in-the-freezer-makes-meal-planning-easier.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "There’s a Reason This Salmon Recipe Has Five Stars",
+      "url": "https://www.nytimes.com/2025/09/15/dining/theres-a-reason-this-salmon-recipe-has-five-stars.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "These Women Make Basketball Fans’ Favorite Food",
+      "url": "https://www.nytimes.com/2025/09/17/dining/basketball-popcorn-barclays.html",
+      "section": "Food",
+      "sourceUrl": "https://www.nytimes.com/section/food",
+      "source": "dom"
+    },
+    {
+      "title": "5 Takeaways From Ousted C.D.C. Director’s Hearing",
+      "url": "https://www.nytimes.com/2025/09/17/health/susan-monarez-cdc-hearing-takeaways.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "Bonnie Addario, 77, Dies; Survivor of Lung Cancer Made Fighting It a Cause",
+      "url": "https://www.nytimes.com/2025/09/12/health/bonnie-addario-dead.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "C.D.C. Vaccine Advisers May Limit Hepatitis B Shots for Newborns",
+      "url": "https://www.nytimes.com/2025/09/16/health/hepatitis-b-vaccine-committee-meeting-infants.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "Former C.D.C. Director to Tell Lawmakers She Was ‘Fired for Holding the Line’",
+      "url": "https://www.nytimes.com/2025/09/16/us/politics/cdc-monarez-testimony-rfk.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "From Well",
+      "url": "https://www.nytimes.com/section/well",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "Kennedy Adds Five New Members to Vaccine Committee",
+      "url": "https://www.nytimes.com/2025/09/15/health/rfk-jr-hhs-vaccine-committee-members.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/health#stream-panel",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "New York and Other States Form Health Bloc as Answer to Trump’s Policies",
+      "url": "https://www.nytimes.com/2025/09/18/nyregion/northeast-public-health-collaborative-trump.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "The New Old Age",
+      "url": "https://www.nytimes.com/column/the-new-old-age",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "Trump Is Shutting Down the War On Cancer",
+      "url": "https://www.nytimes.com/2025/09/14/magazine/cancer-research-grants-funds-trump.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "Who Makes Decisions About Vaccine Policy Now?",
+      "url": "https://www.nytimes.com/interactive/2025/09/16/health/vaccines-rfk-jr-cdc-fda.html",
+      "section": "Health",
+      "sourceUrl": "https://www.nytimes.com/section/health",
+      "source": "dom"
+    },
+    {
+      "title": "Audio",
+      "url": "https://www.nytimes.com/spotlight/podcasts",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "AudioPodcasts and narrated articles",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Columnists",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Columns",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Community",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Cooking",
+      "url": "https://cooking.nytimes.com/",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "CookingRecipes and guides",
+      "url": "https://cooking.nytimes.com/",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Culture and Lifestyle",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Editors' Picks",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Featured",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Games",
+      "url": "https://www.nytimes.com/crosswords",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "GamesDaily puzzles",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Leagues",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Listen",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "More News",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Most Popular This Week",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Newsletters",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Podcasts",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Recipes",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Recommendations",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Reviews",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Sections",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Site Index",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Site Information Navigation",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "The Athletic",
+      "url": "https://www.nytimes.com/athletic/",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "The AthleticSports coverage",
+      "url": "https://www.nytimes.com/athletic/",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "The Best...",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Top Stories",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Topics",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Weather",
+      "url": null,
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "Wirecutter",
+      "url": "https://www.nytimes.com/wirecutter",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "WirecutterProduct recommendations",
+      "url": "https://www.nytimes.com/wirecutter/",
+      "section": "Home",
+      "sourceUrl": "https://www.nytimes.com/",
+      "source": "dom"
+    },
+    {
+      "title": "A Jane Austen-Inspired Roast Chicken That’s Remarkably Well Done",
+      "url": "https://www.nytimes.com/2025/09/10/magazine/roast-chicken-grapes-recipe.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "An Essay Contest Winner Used A.I. Should She Return the $1,000 Award?",
+      "url": "https://www.nytimes.com/2025/09/10/magazine/essay-contest-ai-ethics.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "Guitar Nerds and Surf Bros Didn’t Want to ‘Get Political.’ Then Came the Tariffs.",
+      "url": "https://www.nytimes.com/2025/09/10/magazine/trump-tariffs-youtube-politics.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "How a Group of Students in the Pacific Islands Reshaped Global Climate Law",
+      "url": "https://www.nytimes.com/2025/09/10/magazine/global-climate-law-students.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "Is It Cutesy or Abominable to Make Up Random Words?",
+      "url": "https://www.nytimes.com/interactive/2025/09/12/magazine/word-shortening-hodgman-quiz.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "It Isn’t Just the U.S. The Whole World Has Soured on Climate Politics.",
+      "url": "https://www.nytimes.com/2025/09/16/magazine/climate-politics-us-world-paris-agreement.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "Late-Night TV Is Fading. There’s One Part You May Come to Miss.",
+      "url": "https://www.nytimes.com/2025/09/16/magazine/late-night-tv.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/magazine#stream-panel",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "The 9.14.25 Issue",
+      "url": "https://www.nytimes.com/issue/magazine/2025/09/12/the-91425-issue",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "The Best Part of Any Piece of Mail Is the Stamp",
+      "url": "https://www.nytimes.com/2025/09/09/magazine/the-best-part-of-any-piece-of-mail-is-the-stamp.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "The Cost of Performing Childhood for Your Parent’s Art",
+      "url": "https://www.nytimes.com/2025/09/12/magazine/child-subjects-art-abuse-sally-mann-molly-jong-fast-ruby-franke.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "The Sunday Magazine Staff",
+      "url": "https://www.nytimes.com/interactive/magazine/masthead.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "This Classic French Gratin Is Complete Comfort",
+      "url": "https://www.nytimes.com/2025/09/17/magazine/french-gratin-potatoes.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "What We Know About JPMorgan’s Long Relationship With Jeffrey Epstein",
+      "url": "https://www.nytimes.com/2025/09/08/magazine/what-we-know-about-jpmorgans-long-relationship-with-jeffrey-epstein.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "What Will China’s Green-Tech Ambitions Cost the World?",
+      "url": "https://www.nytimes.com/2025/09/18/magazine/china-green-tech-laos.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "When Dementia Steals the Imagination of a Children’s Book Writer",
+      "url": "https://www.nytimes.com/2025/09/14/magazine/robert-munsch-author-children-books-dementia.html",
+      "section": "Magazine",
+      "sourceUrl": "https://www.nytimes.com/section/magazine",
+      "source": "dom"
+    },
+    {
+      "title": "‘No One Should Be Very Confident’: Four Economists Dissect Trump and the Economy",
+      "url": "https://www.nytimes.com/2025/09/18/opinion/fed-rate-cut-miran-cook-powell.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "America Darkens",
+      "url": "https://www.nytimes.com/2025/09/18/opinion/kirk-trump-bondi-vance-democrats.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "Charlie Kirk, Jimmy Kimmel and the Future of Free Speech in America",
+      "url": "https://www.nytimes.com/2025/09/18/opinion/trump-vance-bondi-douglassfree-speech.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "Ezra Klein Is Worried — but Not About a Radicalized Left",
+      "url": "https://www.nytimes.com/2025/09/18/opinion/interesting-times-ross-douthat-ezra-klein.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "Ezra Klein Is Worried — but Not About a Radicalized Left",
+      "url": "https://www.nytimes.com/video/opinion/100000010397951/ezra-klein-is-worried-but-not-about-a-radicalized-left.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "I Asked Ezra Klein if Left-Wing Despair Is a Problem",
+      "url": "https://www.nytimes.com/video/opinion/100000010397953/i-asked-ezra-klein-if-left-wing-despair-is-a-problem.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "Jimmy Kimmel, and Free Speech, Under Attack",
+      "url": "https://www.nytimes.com/2025/09/18/opinion/jimmy-kimmel-free-speech.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/opinion#stream-panel",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "The Billionaire Trump Supporter Who Will Soon Own the News",
+      "url": "https://www.nytimes.com/2025/09/18/opinion/larry-ellison-paramount-cbs-tiktok.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "The Era of Dark Passions",
+      "url": "https://www.nytimes.com/2025/09/18/opinion/trump-kirk-rage.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "The Unexpected Upside of Phone Bans in Schools",
+      "url": "https://www.nytimes.com/2025/09/17/opinion/phone-bans-schools-kids.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "When It Comes to the Left, Ezra Klein Is Frustrated",
+      "url": "https://www.nytimes.com/video/opinion/100000010407682/when-it-comes-to-the-left-ezra-klein-is-frustrated.html",
+      "section": "Opinion",
+      "sourceUrl": "https://www.nytimes.com/section/opinion",
+      "source": "dom"
+    },
+    {
+      "title": "Democrats Pitch Bill to Protect Speech Targeted by Trump",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/democrats-free-speech-bill-trump.html",
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "Disney Pulled Jimmy Kimmel as Pressure Built on Multiple Fronts",
+      "url": "https://www.nytimes.com/2025/09/18/business/media/disney-abc-jimmy-kimmel.html",
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "Follow Us",
+      "url": null,
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "How Jimmy Kimmel Went From ‘The Man Show’ to MAGA Adversary",
+      "url": "https://www.nytimes.com/2025/09/18/arts/television/jimmy-kimmel-host-timeline.html",
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "In ‘107 Days,’ Kamala Harris Lays Out Her Regrets",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/kamala-harris-book-takeaways.html",
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/politics#stream-panel",
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "The F.C.C. Threatened to Punish Kimmel ‘the Hard Way.’ ABC Made It Easy.",
+      "url": "https://www.nytimes.com/2025/09/18/arts/television/jimmy-kimmel.html",
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "Upending Precedent, Thune Bows To Realities of a Polarized Senate",
+      "url": "https://www.nytimes.com/2025/09/17/us/politics/john-thune-senate-filibuster.html",
+      "section": "Politics",
+      "sourceUrl": "https://www.nytimes.com/section/politics",
+      "source": "dom"
+    },
+    {
+      "title": "‘Shockingly Beautiful’ Fossil Reveals Oldest Dome-Headed Dinosaur",
+      "url": "https://www.nytimes.com/2025/09/17/science/pachycephalosaurus-fossil-mongolia.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "A Forgotten Cosmic Impact Was Hidden in a Museum’s Glass Shards",
+      "url": "https://www.nytimes.com/2025/09/16/science/tektites-australia-asteroid-impact.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Can Drug Users Be Forced Into Rehab? Trump Says Yes. So Do 34 States.",
+      "url": "https://www.nytimes.com/2025/09/17/health/trump-drug-users-involuntary-commitment-rehab.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Climate and Environment",
+      "url": "https://www.nytimes.com/section/climate",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Do Reptiles Have Moods, Too?",
+      "url": "https://www.nytimes.com/2025/09/18/science/reptiles-cognition-moods.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "E.P.A. Keeps Polluters on the Hook to Clean Up ‘Forever Chemicals’",
+      "url": "https://www.nytimes.com/2025/09/18/climate/epa-pfas-forever-chemicals.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Fired C.D.C. Director Describes Clashes With Kennedy and Turmoil at Agency",
+      "url": "https://www.nytimes.com/2025/09/17/us/politics/monarez-cdc-senate-cassidy.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "How Did Hands Evolve? The Answer Is Behind You.",
+      "url": "https://www.nytimes.com/2025/09/17/science/evolution-crispr-hands.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Kennedy’s Advisory Panel Votes to Limit M.M.R.V. Vaccine for Children Under 4",
+      "url": "https://www.nytimes.com/2025/09/18/health/kennedy-cdc-vaccine-meeting-hepatitis-covid.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/science#stream-panel",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Math, Revealed",
+      "url": "https://www.nytimes.com/series/math-revealed",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Organ Transplant Group Faces Shutdown After Safety Problems",
+      "url": "https://www.nytimes.com/2025/09/18/us/organ-transplants-rfk-shutdown.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Origins",
+      "url": "https://www.nytimes.com/column/origins",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Questions Are Raised About Vaccine Panel’s Reliability as Policy Review Gets Underway",
+      "url": "https://www.nytimes.com/2025/09/17/health/kennedy-acip-insurers-cassidy.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Sign Up for the Science Times Newsletter",
+      "url": null,
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Trilobites",
+      "url": "https://www.nytimes.com/column/trilobites",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Vera Rubin Observatory",
+      "url": "https://www.nytimes.com/news-event/vera-rubin-telescope",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Western States Issue Their Own Vaccine Recommendations to Counter Kennedy",
+      "url": "https://www.nytimes.com/2025/09/17/health/vaccine-guidelines-california-oregon-washington-hawaii-rfk.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "Wildfire Smoke Will Kill Thousands More by 2050, Study Finds",
+      "url": "https://www.nytimes.com/2025/09/18/climate/wildfire-smoke-health-deaths.html",
+      "section": "Science",
+      "sourceUrl": "https://www.nytimes.com/section/science",
+      "source": "dom"
+    },
+    {
+      "title": "A Young Quarterback’s Vulnerable Moment Went Viral: ‘Don’t Give Up on Me’",
+      "url": "https://www.nytimes.com/athletic/6634579/2025/09/17/jj-mccarthy-leadership-lesson-vulnerability-justin-jefferson-viral/",
+      "section": "Sports",
+      "sourceUrl": "https://www.nytimes.com/section/sports",
+      "source": "dom"
+    },
+    {
+      "title": "Björn Borg Lifts the Devil Off His Shoulder",
+      "url": "https://www.nytimes.com/athletic/6636638/2025/09/18/bjorn-borg-life-story-tennis-heartbeats-book/",
+      "section": "Sports",
+      "sourceUrl": "https://www.nytimes.com/section/sports",
+      "source": "dom"
+    },
+    {
+      "title": "Clayton Kershaw Is Retiring After 18 M.L.B. Seasons and 3 Cy Young Awards",
+      "url": "https://www.nytimes.com/athletic/6641402/2025/09/18/clayton-kershaw-dodgers-retirement-announcement-mlb/",
+      "section": "Sports",
+      "sourceUrl": "https://www.nytimes.com/section/sports",
+      "source": "dom"
+    },
+    {
+      "title": "Richard Sherman Describes the 4 Best Leaders He Played With in the N.F.L.",
+      "url": "https://www.nytimes.com/athletic/6637259/2025/09/18/richard-sherman-leadership-nfl-marshawn-lynch/",
+      "section": "Sports",
+      "sourceUrl": "https://www.nytimes.com/section/sports",
+      "source": "dom"
+    },
+    {
+      "title": "Sports From The New York Times",
+      "url": "https://www.nytimes.com/spotlight/new-york-times-sports",
+      "section": "Sports",
+      "sourceUrl": "https://www.nytimes.com/section/sports",
+      "source": "dom"
+    },
+    {
+      "title": "Can YouTube Make Livestreaming Its Next Big Thing?",
+      "url": "https://www.nytimes.com/2025/09/16/business/media/youtube-livestreaming-video.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Doors on Some Teslas Could Trap Occupants, Federal Safety Agency Says",
+      "url": "https://www.nytimes.com/2025/09/16/business/tesla-doors-nhtsa-investigation.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Has Britain Gone Too Far With Its Digital Controls?",
+      "url": "https://www.nytimes.com/2025/09/17/technology/britain-facial-recognition-digital-controls.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/technology#stream-panel",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "LimeWire, Former File-Sharing Service, Is Revealed as Buyer of Fyre Festival",
+      "url": "https://www.nytimes.com/2025/09/16/us/limewire-crypto-fyre-festival.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Man Known as the ‘Tinder Swindler’ Is Arrested in Georgia",
+      "url": "https://www.nytimes.com/2025/09/16/world/europe/tinder-swindler-simon-leviev-arrested.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Personal Technology",
+      "url": "https://www.nytimes.com/section/technology/personaltech",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Since Leaving Washington, Elon Musk Has Been All In on His A.I. Company",
+      "url": "https://www.nytimes.com/2025/09/18/technology/elon-musk-artificial-intelligence-xai.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Social Platforms Duck Blame for Inflaming Divisions Before Charlie Kirk’s Death",
+      "url": "https://www.nytimes.com/2025/09/16/technology/charlie-kirk-meta-x-tiktok.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Trump Delays TikTok Ban Again as a Deal Takes Shape",
+      "url": "https://www.nytimes.com/2025/09/16/technology/tiktok-fourth-delay.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "United Airlines Says Problems at Newark Airport Have Eased Greatly",
+      "url": "https://www.nytimes.com/2025/09/16/business/united-airlines-newark-airport.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "Who Is Brendan Carr of the F.C.C.?",
+      "url": "https://www.nytimes.com/2025/09/18/technology/brendan-carr-fcc-jimmy-kimmel.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "With the Em Dash, A.I. Embraces a Fading Tradition",
+      "url": "https://www.nytimes.com/2025/09/18/magazine/chatgpt-dash-hyphen-writing-communication.html",
+      "section": "Technology",
+      "sourceUrl": "https://www.nytimes.com/section/technology",
+      "source": "dom"
+    },
+    {
+      "title": "36 Hours",
+      "url": "https://www.nytimes.com/column/36-hours",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Cruise Ship Passenger With $16,000 Gambling Debt Jumps Overboard",
+      "url": "https://www.nytimes.com/2025/09/10/travel/cruise-ship-passenger-with-16000-gambling-debt-jumps-overboard.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Dan Brown’s 5 Favorite Places in Prague",
+      "url": "https://www.nytimes.com/2025/09/15/travel/dan-brown-the-secret-of-secrets-prague.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Do You Know Where in the Country These Novels Are Set?",
+      "url": "https://www.nytimes.com/interactive/2025/09/15/books/review/old-west-quiz.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Funicular Crash Has Jarred Lisbon’s Sense of Itself",
+      "url": "https://www.nytimes.com/2025/09/14/world/europe/lisbon-funicular-crash.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Help! Aer Lingus Wouldn’t Let Me Fly Because of a Visa I Didn’t Need.",
+      "url": "https://www.nytimes.com/2025/09/18/travel/aer-lingus-uganda-visa.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/travel#stream-panel",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Man Dies After Becoming Unresponsive on Roller Coaster at Epic Universe",
+      "url": "https://www.nytimes.com/2025/09/18/us/universal-ride-death-stardust-racers.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Scotch and the Sea: Venturing Into the Soul of the Hebrides",
+      "url": "https://www.nytimes.com/2025/09/17/travel/scotland-hebrides-skye.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "The Trump Administration Wants to Roll Back Airline Passenger Rights",
+      "url": "https://www.nytimes.com/2025/09/11/travel/airline-passenger-protections-trump-transportation-department.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Travel 101",
+      "url": "https://www.nytimes.com/column/travel-101",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Trump Administration Seeks Pilot Projects for Air Taxis",
+      "url": "https://www.nytimes.com/2025/09/12/business/trump-air-taxi-faa.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "Why Wild Swimming Is the Most Luxurious Hotel Amenity of All",
+      "url": "https://www.nytimes.com/2025/09/11/t-magazine/wild-swimming-hotels.html",
+      "section": "Travel",
+      "sourceUrl": "https://www.nytimes.com/section/travel",
+      "source": "dom"
+    },
+    {
+      "title": "11 Democratic Officials Arrested Trying to Access ICE Detention Cells",
+      "url": "https://www.nytimes.com/video/us/politics/100000010408808/11-democratic-officials-arrested-trying-to-access-ice-detention-cells.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "A Domestic Violence Case in Rural Pennsylvania Ended in a Deadly Ambush",
+      "url": "https://www.nytimes.com/2025/09/18/us/pennsylvania-suspect-officers-killed.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Amid Republican Crackdown on D.C., City Leaders to Testify",
+      "url": "https://www.nytimes.com/2025/09/18/us/dc-leaders-testify.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Ash Cloud Over Mount St. Helens Conjures Memories of 1980 Disaster",
+      "url": "https://www.nytimes.com/2025/09/17/us/mount-st-helens-volcanic-ash-cloud.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Can Trump Actually Designate Antifa a Terrorist Group? Here Are the Facts.",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/trump-antifa-terrorist-group.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Highlights",
+      "url": null,
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "In Texas, Parents Fighting Vaccinations Say Their Movement Is Winning",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/vaccine-mandates-covid-measles.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "In Their Own Words: Trump and Top Officials Change Tone on Free Speech",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/trump-free-speech.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/us#stream-panel",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Military Helicopter Carrying 4 Soldiers Crashes in Washington State",
+      "url": "https://www.nytimes.com/2025/09/18/us/military-helicopter-crash-washington.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Texas Man Dies in Fall From Alaska Mountain Trail",
+      "url": "https://www.nytimes.com/2025/09/18/us/alaska-hikers-dead-juneau.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "The F.J. King, Lost in 1886, Is Found in the Depths of Lake Michigan",
+      "url": "https://www.nytimes.com/2025/09/18/us/ghost-ship-wreckage-lake-michigan.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Trump Administration Changes Tone on Free Speech",
+      "url": "https://www.nytimes.com/video/us/politics/100000010407362/trump-administration-free-speech.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Trump Has Threatened Broadcast Licenses. Here’s How They Work.",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/trump-broadcast-licenses-fcc.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "Warner Accuses Trump Administration of Undermining National Security",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/mark-warner-national-security-warning.html",
+      "section": "U.S.",
+      "sourceUrl": "https://www.nytimes.com/section/us",
+      "source": "dom"
+    },
+    {
+      "title": "7.8-Magnitude Earthquake Off Russia Prompts Brief Tsunami Advisory in Alaska",
+      "url": "https://www.nytimes.com/interactive/2025/09/18/world/russia-earthquake-tsunami.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Dispatches",
+      "url": "https://www.nytimes.com/spotlight/dispatches-international",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Drones vs. Lasers",
+      "url": "https://www.nytimes.com/2025/09/18/briefing/nato-air-defense-trump-media-britain-tech-deal.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Exxon Urges Europe to Repeal Rules to Make Companies Track Climate Pollution",
+      "url": "https://www.nytimes.com/2025/09/18/climate/exxon-woods-europe-climate-sustainability-repeal.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "How China Became a Wedge Between Two South Pacific Neighbors",
+      "url": "https://www.nytimes.com/2025/09/18/world/australia/china-pacific-nz-cook-islands.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "José María Tojeira, 78, Dies; Pursued Killers of His Fellow Priests",
+      "url": "https://www.nytimes.com/2025/09/18/world/americas/jose-maria-tojeira-dead.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Latest",
+      "url": "https://www.nytimes.com/section/world#stream-panel",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Read The Times in Spanish",
+      "url": "https://www.nytimes.com/es/spotlight/read-the-times-in-spanish",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Rifts Grow Between Netanyahu and His Security Chiefs",
+      "url": "https://www.nytimes.com/2025/09/18/world/middleeast/israel-netanyahu-military-gaza.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "The Global Profile",
+      "url": "https://www.nytimes.com/column/the-global-profile",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Three Nuns Plot Escape Back to Their Abbey",
+      "url": "https://www.nytimes.com/video/world/europe/100000010407353/nuns-escape-convent-austria.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Tiffany Trump Cruised on an Oil Mogul’s Yacht as Her Father-in-Law Talked Oil Deals",
+      "url": "https://www.nytimes.com/2025/09/18/world/europe/tiffany-trump-yacht-oil.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Trump and Starmer Acknowledge Divide Over Palestinian Statehood",
+      "url": "https://www.nytimes.com/live/2025/09/18/world/trump-uk-visit",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Trump and Starmer, Skirting Differences, Praise Each Other in U.K.",
+      "url": "https://www.nytimes.com/2025/09/18/world/europe/trump-starmer-britain.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "U.S. to Cut Out Nongovernmental Groups in Refocusing Health Aid",
+      "url": "https://www.nytimes.com/2025/09/18/us/politics/us-aid-health-ngos.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "West Africans Deported by the U.S. Sue Ghana for Rights Violations",
+      "url": "https://www.nytimes.com/2025/09/18/world/africa/us-deportees-sue-ghana.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Where Will Gazans Go?",
+      "url": "https://www.nytimes.com/video/world/middleeast/100000010405069/where-will-gazans-go.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    },
+    {
+      "title": "Young Activists Say 3 Trump Orders Violate Constitutional Rights",
+      "url": "https://www.nytimes.com/2025/09/18/climate/lighthiser-trial-climate-trump.html",
+      "section": "World",
+      "sourceUrl": "https://www.nytimes.com/section/world",
+      "source": "dom"
+    }
+  ]
+}

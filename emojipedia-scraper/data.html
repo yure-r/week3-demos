@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Apple Emojis (Realtime DB)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
+    header { display:flex; align-items: baseline; gap: 12px; }
+    #count { opacity: 0.7; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .card {
+      border: 1px solid #e3e3e3; border-radius: 12px; padding: 12px;
+      display: flex; flex-direction: column; gap: 8px; background: #fff;
+    }
+    .img {
+      width: 60px; height: 60px; background-size: contain; background-repeat: no-repeat; background-position: center;
+      margin-bottom: 8px;
+    }
+    .slug { font-size: 12px; color: #666; word-break: break-all; }
+    .name { font-weight: 600; }
+    .links { display:flex; gap: 8px; }
+    .links a { font-size: 12px; color: #0645ad; text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Apple Emojis</h1>
+    <div id="count"></div>
+  </header>
+
+  <div class="links">
+    <!-- Optional: quick REST link for debugging, replace with your DB name -->
+    <!-- <a target="_blank" href="https://<your-db>.firebaseio.com/emojipedia/apple_emojis.json">REST endpoint</a> -->
+  </div>
+
+  <div id="grid" class="grid"></div>
+
+  <!-- Firebase compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+  <script>
+    // --- paste your web app config from Firebase console (Project settings > General > Web app) ---
+const firebaseConfig = {
+  apiKey: "AIzaSyCxTtgElMiaOwiXelX8MbToyrmuaEGR7fs",
+  authDomain: "appledata-8cc22.firebaseapp.com",
+  databaseURL: "https://appledata-8cc22-default-rtdb.firebaseio.com",
+  projectId: "appledata-8cc22",
+  storageBucket: "appledata-8cc22.firebasestorage.app",
+  messagingSenderId: "794097482509",
+  appId: "1:794097482509:web:3b4ee37e8a8aae51d64e44",
+  measurementId: "G-D15918CDBF"
+};
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const grid = document.getElementById('grid');
+    const count = document.getElementById('count');
+
+    function render(dataObj) {
+      grid.innerHTML = "";
+      const entries = Object.entries(dataObj || {}).sort((a, b) => a[0].localeCompare(b[0]));
+      count.textContent = `${entries.length} emojis`;
+
+      for (const [slug, item] of entries) {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const img = document.createElement('div');
+        img.className = 'img';
+        img.style.backgroundImage = `url("${item.image}")`;
+
+        const name = document.createElement('div');
+        name.className = 'name';
+        name.textContent = item.name || slug;
+
+        const slugEl = document.createElement('div');
+        slugEl.className = 'slug';
+        slugEl.textContent = slug;
+
+        const links = document.createElement('div');
+        links.className = 'links';
+
+        const aEmoji = document.createElement('a');
+        aEmoji.href = item.href;
+        aEmoji.target = "_blank";
+        aEmoji.rel = "noopener";
+        aEmoji.textContent = "Emojipedia";
+
+        const aImg = document.createElement('a');
+        aImg.href = item.image;
+        aImg.target = "_blank";
+        aImg.rel = "noopener";
+        aImg.textContent = "Image URL";
+
+        links.append(aEmoji, aImg);
+        card.append(img, name, slugEl, links);
+        grid.appendChild(card);
+      }
+    }
+
+    // Subscribe (live)
+    const ref = db.ref('/emojipedia/apple_emojis');
+    ref.on('value', (snap) => render(snap.val()), (err) => {
+      console.error('DB read failed', err);
+      count.textContent = 'error loading data';
+    });
+  </script>
+</body>
+</html>

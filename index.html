@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event Listener Playground — Mouse • Pointer • Touch • Keyboard • More</title>
+<style>
+  :root {
+    --bg: #0f1220;
+    --panel: #161a2b;
+    --ink: #e7ebff;
+    --muted: #9aa3c7;
+    --accent: #6ae3ff;
+    --accent-2: #a6ff6a;
+    --bad: #ff6a6a;
+    --good: #6aff9f;
+    --warn: #ffd36a;
+    --border: #242947;
+    --shadow: 0 6px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font: 15px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(1200px 800px at 10% -10%, #1a1f3d 0, transparent 60%),
+                radial-gradient(800px 600px at 110% 10%, #102034 0, transparent 50%),
+                var(--bg);
+  }
+
+  header {
+    position: sticky; top: 0; z-index: 5;
+    background: linear-gradient(180deg, rgba(15,18,32,.9), rgba(15,18,32,.6));
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  header h1 { margin: 0; font-size: 18px; letter-spacing: .2px; }
+  header p { margin: 4px 0 0 0; color: var(--muted); font-size: 13px; }
+  .bar-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .btn {
+    border: 1px solid var(--border);
+    background: #1b1f36;
+    color: var(--ink);
+    padding: 8px 12px; border-radius: 10px; cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .btn:hover { outline: 1px solid #2b3160; }
+  .badge { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); background:#12162a; color: var(--muted); font-size: 12px; }
+  .badge.good { color: var(--good); border-color: #2c5; }
+  .badge.bad { color: var(--bad); border-color: #c44; }
+  .badge.warn { color: var(--warn); border-color: #aa8a3a; }
+
+  main {
+    padding: 18px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  section.panel {
+    background: linear-gradient(180deg, #12162a, #0d1122);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 220px;
+  }
+  section.panel header {
+    position: relative;
+    padding: 12px 14px;
+    border: none;
+    background: linear-gradient(180deg, rgba(26,31,60,.9), rgba(26,31,60,.5));
+  }
+  section.panel header h2 {
+    margin: 0; font-size: 15px; display: flex; align-items: center; gap: 8px;
+  }
+  section.panel .content { padding: 12px 14px; }
+  section.panel .log {
+    border-top: 1px dashed var(--border);
+    background: #0c1020;
+    padding: 10px 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; color: #cdd5ff; max-height: 120px; overflow: auto;
+  }
+  .box {
+    border: 2px dashed #2f396e;
+    border-radius: 12px;
+    padding: 10px; min-height: 120px;
+    display: grid; place-items: center;
+    color: var(--muted);
+    position: relative;
+    transition: transform .15s ease;
+  }
+  .box.active { outline: 2px solid var(--accent); transform: translateY(-2px); }
+  .box.good { outline: 2px solid var(--accent-2); }
+  .box.bad { outline: 2px solid var(--bad); }
+  .pill { font-size: 12px; padding: 4px 8px; border-radius: 999px; background: #20264a; border: 1px solid #2c3369; color: #cfd6ff; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  input, textarea, select {
+    width: 100%; background: #0e1327; color: var(--ink);
+    border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px;
+    outline: none;
+  }
+  input:focus, textarea:focus, select:focus { border-color: #3b4aa8; box-shadow: 0 0 0 3px rgba(106, 227, 255, .15) }
+  form .row > * { flex: 1; min-width: 120px; }
+  .progress {
+    width: 100%; height: 8px; border-radius: 999px; background: #0a0e1f; border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .progress > i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), #78ffa6); }
+
+  /* Demo-specific visuals */
+  #pointerCanvas, #touchCanvas {
+    width: 100%; height: 160px; background: #0a0f24; border-radius: 10px; border: 1px solid var(--border);
+  }
+  .circle {
+    position: absolute; width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.6);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: pop .35s ease;
+  }
+  @keyframes pop {
+    from { transform: translate(-50%, -50%) scale(.6); opacity: .0; }
+    to   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  }
+
+  /* Little animated square to demo animation/transition events */
+  .animArea { display: grid; gap: 10px; }
+  .square {
+    width: 40px; height: 40px; border-radius: 8px; background: #3a9cff;
+    transition: transform .35s ease, background .35s ease;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  .square.bump { transform: translateY(-8px) scale(1.1); background: #69ffa6; }
+  @keyframes pulse { 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.06); } }
+
+  /* Scroll demo */
+  .scrollBox { height: 160px; overflow: auto; border-radius: 10px; border: 1px solid var(--border); background:#0b0f22; padding: 10px; }
+  .tall { height: 600px; background: linear-gradient(#19214a, #0b0f22 40%, #19214a); border-radius: 8px; }
+
+  footer.note {
+    grid-column: 1 / -1; color: var(--muted); text-align: center; padding: 10px 0 30px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Event Listener Playground</h1>
+      <p>Click, press, drag, scroll, touch — each panel shows which events fired and reacts visually.</p>
+    </div>
+    <div class="bar-actions">
+      <span id="netStatus" class="badge">Network: …</span>
+      <span id="visStatus" class="badge">Tab: …</span>
+      <span id="sizeStatus" class="badge">Size: …</span>
+      <button class="btn" id="clearAll">Clear all logs</button>
+      <button class="btn" id="fireCustom">Fire custom “burst” event</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Mouse Events -->
+    <section class="panel" id="mousePanel">
+      <header><h2>🖱️ Mouse Events <span class="badge">click / dblclick / contextmenu / move / enter / leave / down / up / wheel</span></h2></header>
+      <div class="content">
+        <div class="box" id="mouseBox" tabindex="0" aria-label="Mouse demo area">
+          <div class="row">
+            <span class="pill">Try: click, double-click, right-click, scroll, move in/out</span>
+          </div>
+        </div>
+      </div>
+      <pre class="log" id="mouseLog"></pre>
+    </section>
+
+    <!-- Pointer Events -->
+    <section class="panel" id="pointerPanel">
+      <header><h2>🖐️ Pointer Events <span class="badge">pointerdown / move / up / enter / leave / cancel</span></h2></header>
+      <div class="content">
+        <div class="box" id="pointerBox">
+          <canvas id="pointerCanvas"></canvas>
+          <div class="row"><span class="pill">Pressure & type shown in log</span></div>
+        </div>
+      </div>
+      <pre class="log" id="pointerLog"></pre>
+    </section>
+
+    <!-- Touch Events -->
+    <section class="panel" id="touchPanel">
+      <header><h2>🤏 Touch Events <span class="badge">touchstart / move / end / cancel</span></h2></header>
+      <div class="content">
+        <div class="box" id="touchBox">
+          <canvas id="touchCanvas"></canvas>
+          <div class="row"><span class="pill">Use your phone or trackpad</span></div>
+        </div>
+      </div>
+      <pre class="log" id="touchLog"></pre>
+    </section>
+
+    <!-- Keyboard + Focus -->
+    <section class="panel" id="kbdPanel">
+      <header><h2>⌨️ Keyboard & Focus <span class="badge">keydown / keyup • focus / blur</span></h2></header>
+      <div class="content grid-2">
+        <div>
+          <label class="pill">Type here</label>
+          <input id="kbdInput" placeholder="Press some keys…" />
+        </div>
+        <div>
+          <label class="pill">Focus me</label>
+          <input id="focusInput" placeholder="Focus/blur to see events" />
+        </div>
+      </div>
+      <pre class="log" id="kbdLog"></pre>
+    </section>
+
+    <!-- Form Events -->
+    <section class="panel" id="formPanel">
+      <header><h2>📝 Form Events <span class="badge">input / change / submit</span></h2></header>
+      <div class="content">
+        <form id="demoForm" class="grid-2">
+          <div class="row">
+            <input name="first" placeholder="First name" />
+            <input name="last" placeholder="Last name" />
+          </div>
+          <div class="row">
+            <select name="role">
+              <option value="">Choose role…</option>
+              <option>Student</option>
+              <option>TA</option>
+              <option>Professor</option>
+            </select>
+            <button class="btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <pre class="log" id="formLog"></pre>
+    </section>
+
+    <!-- Clipboard Events -->
+    <section class="panel" id="clipPanel">
+      <header><h2>📋 Clipboard Events <span class="badge">copy / cut / paste</span></h2></header>
+      <div class="content">
+        <textarea id="clipArea" rows="5" placeholder="Copy, cut, or paste here…"></textarea>
+      </div>
+      <pre class="log" id="clipLog"></pre>
+    </section>
+
+    <!-- Drag & Drop -->
+    <section class="panel" id="dndPanel">
+      <header><h2>🧲 Drag & Drop <span class="badge">dragstart / dragover / drop / dragend / enter / leave</span></h2></header>
+      <div class="content grid-2">
+        <div class="box" id="dragSrc" draggable="true" aria-grabbed="false">
+          <span class="pill">Drag me</span>
+        </div>
+        <div class="box" id="dropZone" aria-dropeffect="copy">
+          <span class="pill">Drop here</span>
+        </div>
+      </div>
+      <pre class="log" id="dndLog"></pre>
+    </section>
+
+    <!-- Scroll & Wheel -->
+    <section class="panel" id="scrollPanel">
+      <header><h2>🌀 Scroll & Wheel <span class="badge">scroll • wheel</span></h2></header>
+      <div class="content">
+        <div class="progress" aria-label="scroll progress"><i id="scrollProg"></i></div>
+        <div class="scrollBox" id="scrollBox" tabindex="0">
+          <div class="tall"></div>
+        </div>
+      </div>
+      <pre class="log" id="scrollLog"></pre>
+    </section>
+
+    <!-- Animation & Transition -->
+    <section class="panel" id="animPanel">
+      <header><h2>🎞️ CSS Anim & Transition <span class="badge">animationstart / iteration / end • transitionend</span></h2></header>
+      <div class="content animArea">
+        <div class="square" id="square"></div>
+        <div class="row">
+          <button class="btn" id="bumpBtn">Trigger transition</button>
+        </div>
+      </div>
+      <pre class="log" id="animLog"></pre>
+    </section>
+
+    <!-- Window / Document -->
+    <section class="panel" id="winPanel">
+      <header><h2>🧭 Window / Document <span class="badge">resize • visibilitychange • online/offline</span></h2></header>
+      <div class="content">
+        <div class="row"><span class="pill">Status badges update live in the top bar.</span></div>
+      </div>
+      <pre class="log" id="winLog"></pre>
+    </section>
+
+    <!-- Custom Event -->
+    <section class="panel" id="customPanel">
+      <header><h2>✨ Custom Events <span class="badge">CustomEvent</span></h2></header>
+      <div class="content">
+        <div class="box" id="customBox">
+          <span class="pill">Click “Fire custom event” in the header</span>
+        </div>
+      </div>
+      <pre class="log" id="customLog"></pre>
+    </section>
+
+    <footer class="note">
+      This is a curated set (not literally every single DOM event), chosen to be visual and classroom-friendly.
+    </footer>
+  </main>
+
+<script>
+(() => {
+  // --------------- Utilities ---------------
+
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+
+  // Simple per-panel logger (keeps last 25 lines)
+  function mkLogger(id) {
+    const el = document.getElementById(id);
+    const lines = [];
+    return function log(msg) {
+      const t = new Date().toLocaleTimeString();
+      lines.push(`[${t}] ${msg}`);
+      while (lines.length > 25) lines.shift();
+      el.textContent = lines.join('\n');
+      el.scrollTop = el.scrollHeight;
+    }
+  }
+
+  function flashBox(box, klass = 'active', ms = 220) {
+    box.classList.add(klass);
+    setTimeout(() => box.classList.remove(klass), ms);
+  }
+
+  // --------------- Mouse Events ---------------
+  const mouseLog = mkLogger('mouseLog');
+  const mouseBox = document.getElementById('mouseBox');
+
+  ['click','dblclick','contextmenu','mousedown','mouseup','mouseenter','mouseleave','mousemove','wheel']
+    .forEach(type => {
+      mouseBox.addEventListener(type, (e) => {
+        const pos = `(${e.offsetX},${e.offsetY})`;
+        if (type === 'contextmenu') e.preventDefault();
+        if (type === 'mousemove') {
+          // Throttle logging for move
+          if (!mouseBox._lastMove || performance.now() - mouseBox._lastMove > 120) {
+            mouseBox._lastMove = performance.now();
+            mouseLog(`mousemove @ ${pos}`);
+          }
+        } else if (type === 'wheel') {
+          mouseLog(`wheel Δy=${Math.round(e.deltaY)}`);
+          flashBox(mouseBox, 'warn');
+        } else {
+          mouseLog(`${type} @ ${pos}`);
+          flashBox(mouseBox, type === 'dblclick' ? 'good' : 'active');
+        }
+      }, { passive: type === 'wheel' });
+    });
+
+  // --------------- Pointer Events ---------------
+  const pointerLog = mkLogger('pointerLog');
+  const pointerBox = document.getElementById('pointerBox');
+  const pointerCanvas = document.getElementById('pointerCanvas');
+  const pctx = pointerCanvas.getContext('2d');
+
+  function fitCanvas(canvas) {
+    const r = window.devicePixelRatio || 1;
+    const { width, height } = canvas.getBoundingClientRect();
+    canvas.width = Math.max(1, Math.round(width * r));
+    canvas.height = Math.max(1, Math.round(height * r));
+    canvas._pxRatio = r;
+  }
+  const clearCanvas = (ctx) => {
+    ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = '#0a0f24';
+    ctx.fillRect(0,0,ctx.canvas.width, ctx.canvas.height);
+  };
+  function dot(ctx, x, y, pressure=0.5) {
+    const r = clamp(pressure, 0.05, 1) * 10;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fillStyle = '#6ae3ff';
+    ctx.globalAlpha = .85;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  function toCanvasXY(canvas, clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const r = canvas._pxRatio || 1;
+    return [(clientX - rect.left) * r, (clientY - rect.top) * r];
+  }
+  fitCanvas(pointerCanvas); clearCanvas(pctx);
+  window.addEventListener('resize', () => { fitCanvas(pointerCanvas); clearCanvas(pctx); });
+
+  ['pointerdown','pointermove','pointerup','pointerenter','pointerleave','pointercancel'].forEach(type => {
+    pointerBox.addEventListener(type, (e) => {
+      const info = `${type} id=${e.pointerId} type=${e.pointerType} p=${e.pressure.toFixed(2)}`;
+      pointerLog(info);
+      if (type === 'pointerdown') pointerBox.setPointerCapture(e.pointerId);
+      if (type === 'pointerup' || type === 'pointercancel') {
+        try { pointerBox.releasePointerCapture(e.pointerId); } catch {}
+      }
+      if (type === 'pointermove' || type === 'pointerdown') {
+        const [x,y] = toCanvasXY(pointerCanvas, e.clientX, e.clientY);
+        dot(pctx, x, y, e.pressure || 0.5);
+      }
+      flashBox(pointerBox, 'active');
+    }, { passive: true });
+  });
+
+  // --------------- Touch Events ---------------
+  const touchLog = mkLogger('touchLog');
+  const touchBox = document.getElementById('touchBox');
+  const touchCanvas = document.getElementById('touchCanvas');
+  const tctx = touchCanvas.getContext('2d');
+  fitCanvas(touchCanvas); clearCanvas(tctx);
+  window.addEventListener('resize', () => { fitCanvas(touchCanvas); clearCanvas(tctx); });
+
+  ['touchstart','touchmove','touchend','touchcancel'].forEach(type => {
+    touchBox.addEventListener(type, (e) => {
+      const touches = e.touches ? e.touches.length : 0;
+      touchLog(`${type} touches=${touches}`);
+      if (e.touches) {
+        for (let i=0; i<e.touches.length; i++) {
+          const t = e.touches[i];
+          const [x,y] = toCanvasXY(touchCanvas, t.clientX, t.clientY);
+          dot(tctx, x, y, .7);
+        }
+      }
+      flashBox(touchBox, 'active');
+    }, { passive: true });
+  });
+
+  // --------------- Keyboard & Focus ---------------
+  const kbdLog = mkLogger('kbdLog');
+  const kbdInput = document.getElementById('kbdInput');
+  const focusInput = document.getElementById('focusInput');
+
+  ['keydown','keyup'].forEach(type => {
+    kbdInput.addEventListener(type, (e) => {
+      kbdLog(`${type} key=${e.key} code=${e.code}`);
+      if (e.key === ' ') e.preventDefault(); // example prevent default
+      flashBox(kbdInput, 'active');
+    });
+  });
+
+  focusInput.addEventListener('focus', () => { kbdLog('focus'); flashBox(focusInput, 'good'); });
+  focusInput.addEventListener('blur',  () => { kbdLog('blur');  flashBox(focusInput, 'warn'); });
+
+  // --------------- Form ---------------
+  const formLog = mkLogger('formLog');
+  const demoForm = document.getElementById('demoForm');
+  demoForm.addEventListener('input', (e) => formLog(`input name=${e.target.name} value="${e.target.value}"`));
+  demoForm.addEventListener('change', (e) => formLog(`change name=${e.target.name} value="${e.target.value}"`));
+  demoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(demoForm).entries());
+    formLog('submit ' + JSON.stringify(data));
+    flashBox(demoForm.closest('.panel').querySelector('.content .grid-2'), 'good');
+  });
+
+  // --------------- Clipboard ---------------
+  const clipLog = mkLogger('clipLog');
+  const clipArea = document.getElementById('clipArea');
+  clipArea.addEventListener('copy', (e) => clipLog(`copy length=${window.getSelection()?.toString().length || clipArea.selectionEnd - clipArea.selectionStart}`));
+  clipArea.addEventListener('cut',  (e) => clipLog('cut'));
+  clipArea.addEventListener('paste',(e) => {
+    const txt = (e.clipboardData && e.clipboardData.getData('text')) || '';
+    clipLog(`paste length=${txt.length}`);
+    flashBox(clipArea, 'active');
+  });
+
+  // --------------- Drag & Drop ---------------
+  const dndLog = mkLogger('dndLog');
+  const dragSrc = document.getElementById('dragSrc');
+  const dropZone = document.getElementById('dropZone');
+
+  dragSrc.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', 'Hello from drag source!');
+    dragSrc.style.opacity = .6;
+    dragSrc.setAttribute('aria-grabbed', 'true');
+    dndLog('dragstart');
+  });
+  dragSrc.addEventListener('dragend', () => {
+    dragSrc.style.opacity = 1;
+    dragSrc.setAttribute('aria-grabbed', 'false');
+    dndLog('dragend');
+  });
+  ;['dragenter','dragleave','dragover','drop'].forEach(type => {
+    dropZone.addEventListener(type, (e) => {
+      if (type !== 'dragleave') e.preventDefault();
+      if (type === 'dragenter') { dropZone.classList.add('active'); dndLog('dragenter'); }
+      if (type === 'dragleave') { dropZone.classList.remove('active'); dndLog('dragleave'); }
+      if (type === 'dragover')  { dndLog('dragover'); }
+      if (type === 'drop') {
+        dropZone.classList.remove('active'); flashBox(dropZone, 'good');
+        const data = e.dataTransfer.getData('text/plain');
+        dndLog('drop data="' + data + '"');
+      }
+    });
+  });
+
+  // --------------- Scroll & Wheel ---------------
+  const scrollLog = mkLogger('scrollLog');
+  const scrollBox = document.getElementById('scrollBox');
+  const scrollProg = document.getElementById('scrollProg');
+  function updateScroll() {
+    const max = scrollBox.scrollHeight - scrollBox.clientHeight;
+    const pct = max <= 0 ? 0 : (scrollBox.scrollTop / max) * 100;
+    scrollProg.style.width = pct.toFixed(1) + '%';
+  }
+  scrollBox.addEventListener('scroll', () => { updateScroll(); scrollLog(`scroll top=${scrollBox.scrollTop}`); }, { passive: true });
+  scrollBox.addEventListener('wheel', (e) => { scrollLog(`wheel Δy=${Math.round(e.deltaY)}`); }, { passive: true });
+  updateScroll();
+
+  // --------------- Animations & Transitions ---------------
+  const animLog = mkLogger('animLog');
+  const square = document.getElementById('square');
+  const bumpBtn = document.getElementById('bumpBtn');
+
+  square.addEventListener('animationstart', () => animLog('animationstart (pulse)'));
+  square.addEventListener('animationiteration', () => animLog('animationiteration'));
+  square.addEventListener('animationend', () => animLog('animationend'));
+  square.addEventListener('transitionend', (e) => animLog(`transitionend property=${e.propertyName}`));
+  bumpBtn.addEventListener('click', () => {
+    square.classList.add('bump');
+    setTimeout(() => square.classList.remove('bump'), 380);
+  });
+
+  // --------------- Window / Document (resize, visibility, network) ---------------
+  const sizeBadge = document.getElementById('sizeStatus');
+  const visBadge  = document.getElementById('visStatus');
+  const netBadge  = document.getElementById('netStatus');
+  const winLog = mkLogger('winLog');
+
+  function refreshSize() {
+    sizeBadge.textContent = `Size: ${window.innerWidth}×${window.innerHeight}`;
+  }
+  function refreshVis() {
+    const v = document.visibilityState;
+    visBadge.textContent = `Tab: ${v}`;
+    visBadge.className = 'badge ' + (v === 'visible' ? 'good' : 'warn');
+    winLog('visibilitychange → ' + v);
+  }
+  function refreshNet() {
+    const on = navigator.onLine;
+    netBadge.textContent = 'Network: ' + (on ? 'online' : 'offline');
+    netBadge.className = 'badge ' + (on ? 'good' : 'bad');
+    winLog('network ' + (on ? 'online' : 'offline'));
+  }
+  window.addEventListener('resize', () => { refreshSize(); winLog('resize'); });
+  document.addEventListener('visibilitychange', refreshVis);
+  window.addEventListener('online',  refreshNet);
+  window.addEventListener('offline', refreshNet);
+  refreshSize(); refreshVis(); refreshNet();
+
+  // --------------- Custom Event ---------------
+  const customLog = mkLogger('customLog');
+  const customBox = document.getElementById('customBox');
+  customBox.addEventListener('burst', (e) => {
+    customLog(`custom "burst" detail=${JSON.stringify(e.detail)}`);
+    const b = customBox.getBoundingClientRect();
+    const dot = document.createElement('div');
+    dot.className = 'circle';
+    dot.style.left = (b.width/2) + 'px';
+    dot.style.top  = (b.height/2) + 'px';
+    customBox.appendChild(dot);
+    flashBox(customBox, 'good');
+    setTimeout(()=>dot.remove(), 500);
+  });
+  document.getElementById('fireCustom').addEventListener('click', () => {
+    const event = new CustomEvent('burst', { detail: { from: 'toolbar', time: Date.now() }});
+    customBox.dispatchEvent(event);
+  });
+
+  // --------------- Global controls ---------------
+  document.getElementById('clearAll').addEventListener('click', () => {
+    document.querySelectorAll('.log').forEach(l => l.textContent = '');
+  });
+
+  // --------------- Nice clicks visualization (bonus) ---------------
+  document.addEventListener('click', (e) => {
+    const c = document.createElement('div');
+    c.className = 'circle';
+    c.style.left = e.pageX + 'px';
+    c.style.top  = e.pageY + 'px';
+    c.style.borderColor = 'rgba(106,227,255,.8)';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 450);
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>
