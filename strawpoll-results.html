@@ -1,0 +1,690 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Topic Points Explorer</title>
+<style>
+  :root{
+    --bg:#0c0f14; --panel:#151a22; --text:#e9eef7; --muted:#9fb0c5; --accent:#8ad1ff; --border:#273140;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1280px;margin:0 auto;padding:20px}
+  h1{margin:0 0 6px;font-size:22px}
+  .sub{color:var(--muted);font-size:12px;margin-bottom:14px}
+
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px;margin:10px 0}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;align-items:end}
+  .group{grid-column:span 3}
+  .wide{grid-column:span 6}
+  .full{grid-column:1/-1}
+  label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+  input[type=text],input[type=number],select{width:100%;background:#0f131a;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:8px 10px;outline:none}
+  button{background:#0f131a;color:var(--text);border:1px solid var(--border);padding:8px 10px;border-radius:10px;cursor:pointer}
+  button:hover{border-color:var(--accent)}
+
+  .pillbox{display:flex;flex-wrap:wrap;gap:6px;background:#0f131a;border:1px solid var(--border);padding:10px;border-radius:10px;max-height:140px;overflow:auto}
+  .pill{border:1px solid var(--border);border-radius:999px;padding:4px 8px;font-size:12px;display:inline-flex;align-items:center;gap:6px;background:#0d1117}
+  .pill input{accent-color:var(--accent)}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:12px}
+  thead th{position:sticky;top:0;background:#0f141b;color:var(--muted);font-size:12px;font-weight:600;text-align:left;padding:10px;border-bottom:1px solid var(--border)}
+  tbody td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
+  tbody tr:nth-child(odd) td{background:rgba(255,255,255,0.02)}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .topic{max-width:360px}
+  .muted{color:var(--muted)}
+  .small{font-size:12px}
+  .pin{cursor:pointer}
+  .on{color:var(--accent)}
+
+  .flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .note{font-size:12px;color:var(--muted)}
+
+  #chart{width:100%;height:auto;border:1px dashed var(--border);border-radius:10px;padding:10px}
+  .chartwrap{max-height:520px;overflow:auto;border:1px solid var(--border);border-radius:10px}
+
+  /* Matrix styles */
+  .matrixwrap{overflow:auto;border:1px solid var(--border);border-radius:12px}
+  #matrixTable thead th{position:sticky;top:0;background:#0f141b;z-index:1}
+  #matrixTable th, #matrixTable td{padding:8px 10px;border-bottom:1px solid var(--border)}
+  #matrixTable th.stickyTopic{position:sticky;left:0;background:#101621;z-index:2}
+  #matrixTable td.stickyTopic{position:sticky;left:0;background:#0f141b;}
+
+  @media(max-width:920px){
+    .grid{grid-template-columns:repeat(6,1fr)}
+    .group,.wide,.full{grid-column:1/-1}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Topic Points Explorer</h1>
+  <div class="sub">
+    Bottom matrix: click a student to move them leftmost and reorder topic labels by that student (desc). Ties break by the current filtered overall order.  
+    Main table now shows who placed each topic in their <strong>Top-5</strong> with the rank.
+  </div>
+
+  <!-- Controls -->
+  <div class="panel grid">
+    <div class="group wide">
+      <label>Search topic</label>
+      <input id="search" type="text" placeholder="Type to filter by topic title…">
+    </div>
+    <div class="group">
+      <label>Top N (after sort)</label>
+      <input id="topN" type="number" min="1" placeholder="e.g., 10">
+    </div>
+    <div class="group">
+      <label>Min total (active)</label>
+      <input id="minTotal" type="number" step="1">
+    </div>
+    <div class="group">
+      <label>Max total (active)</label>
+      <input id="maxTotal" type="number" step="1">
+    </div>
+    <div class="group">
+      <label>Sort by</label>
+      <select id="sortBy"></select>
+    </div>
+    <div class="group">
+      <label>Direction</label>
+      <select id="sortDir">
+        <option value="desc">Desc</option>
+        <option value="asc">Asc</option>
+      </select>
+    </div>
+    <div class="group">
+      <label>Preset</label>
+      <select id="preset">
+        <option value="">—</option>
+        <option value="consensus">Most consensus (lowest stdev)</option>
+        <option value="divisive">Most divisive (highest stdev)</option>
+        <option value="topTotal">Highest total</option>
+        <option value="topAvg">Highest average</option>
+      </select>
+    </div>
+    <div class="group flex">
+      <button id="reset">Reset</button>
+      <button id="saveView">Save view</button>
+      <button id="loadView">Load view</button>
+      <button id="clearView">Clear saved</button>
+    </div>
+    <div class="group flex">
+      <label><input id="heatmap" type="checkbox"> Heatmap cells</label>
+      <label><input id="normalize" type="checkbox"> De-bias (z-normalize by participant)</label>
+    </div>
+    <div class="group full">
+      <label>Participants included in totals/averages (weights apply)</label>
+      <div id="incPills" class="pillbox"></div>
+      <div class="note">Weights: 1.0 = normal influence; 0 = excluded. Totals/Avg/AvgRank/Stdev recompute instantly.</div>
+    </div>
+    <div class="group full">
+      <label>Show/Hide columns</label>
+      <div id="colPills" class="pillbox"></div>
+    </div>
+    <div class="group full small muted">
+      “AvgRank (1=best)” converts 0..30 points → ranks (31 - points) and averages them. “Original order” restores your initial topic order.
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="panel">
+    <div class="flex">
+      <div class="note">Live chart of current rows (bars = total with active participants/weights).</div>
+      <button id="downloadSVG">Download chart SVG</button>
+    </div>
+    <div class="chartwrap">
+      <svg id="chart" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+  </div>
+
+  <!-- Table (main) -->
+  <table id="table">
+    <thead id="thead"></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <div class="panel flex">
+    <button id="exportCsv">Export filtered rows to CSV</button>
+    <div class="note">Click the ★ in any row to pin topics for comparison.</div>
+  </div>
+
+  <!-- Compare -->
+  <div class="panel" id="comparePanel">
+    <div class="flex">
+      <strong>Pinned compare</strong>
+      <div class="note" id="pinCount"></div>
+      <button id="clearPins">Clear pins</button>
+    </div>
+    <div id="compareBody" class="small"></div>
+  </div>
+
+  <!-- Matrix -->
+  <div class="panel">
+    <div class="flex">
+      <strong>Student × Topic matrix</strong>
+      <div class="note">
+        Follows current filter & weights. Click a student header to move them leftmost and reorder topics by that student (desc).
+      </div>
+    </div>
+    <div class="matrixwrap">
+      <table id="matrixTable">
+        <thead id="matrixHead"></thead>
+        <tbody id="matrixBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* === DATA === */
+const RAW = {"participants":["Max Dodziuk","Nat","fred","cam","elaine","kamai","saskia","alyssa","akis","Jess","julia","revans"],"rows":[
+{"Topic":"Interactive web experiences","OriginalOrder":0,"Max Dodziuk":29,"Nat":9,"fred":12,"cam":21,"elaine":26,"kamai":30,"saskia":29,"alyssa":30,"akis":29,"Jess":17,"julia":30,"revans":22},
+{"Topic":"Getting access to forbidden knowledge","OriginalOrder":1,"Max Dodziuk":30,"Nat":30,"fred":21,"cam":16,"elaine":17,"kamai":9,"saskia":21,"alyssa":5,"akis":20,"Jess":5,"julia":7,"revans":8},
+{"Topic":"Web development","OriginalOrder":2,"Max Dodziuk":9,"Nat":15,"fred":30,"cam":12,"elaine":28,"kamai":28,"saskia":28,"alyssa":28,"akis":26,"Jess":11,"julia":24,"revans":16},
+{"Topic":"Making a cult","OriginalOrder":3,"Max Dodziuk":5,"Nat":27,"fred":22,"cam":19,"elaine":13,"kamai":0,"saskia":19,"alyssa":6,"akis":14,"Jess":1,"julia":4,"revans":30},
+{"Topic":"3D interactive web experiences (three.js)","OriginalOrder":4,"Max Dodziuk":0,"Nat":23,"fred":20,"cam":26,"elaine":30,"kamai":22,"saskia":23,"alyssa":19,"akis":12,"Jess":20,"julia":27,"revans":11},
+{"Topic":"Body tracking","OriginalOrder":5,"Max Dodziuk":12,"Nat":13,"fred":1,"cam":29,"elaine":29,"kamai":19,"saskia":22,"alyssa":29,"akis":30,"Jess":9,"julia":12,"revans":21},
+{"Topic":"Generative art / Creative coding","OriginalOrder":6,"Max Dodziuk":1,"Nat":16,"fred":0,"cam":28,"elaine":5,"kamai":13,"saskia":30,"alyssa":21,"akis":15,"Jess":24,"julia":29,"revans":25},
+{"Topic":"Datamoshing","OriginalOrder":7,"Max Dodziuk":18,"Nat":25,"fred":14,"cam":30,"elaine":0,"kamai":10,"saskia":9,"alyssa":25,"akis":25,"Jess":0,"julia":23,"revans":13},
+{"Topic":"Parasocial relationships with AI","OriginalOrder":8,"Max Dodziuk":28,"Nat":28,"fred":24,"cam":0,"elaine":25,"kamai":12,"saskia":10,"alyssa":0,"akis":0,"Jess":30,"julia":9,"revans":23},
+{"Topic":"Learning to code","OriginalOrder":9,"Max Dodziuk":10,"Nat":26,"fred":29,"cam":27,"elaine":27,"kamai":25,"saskia":2,"alyssa":22,"akis":4,"Jess":2,"julia":28,"revans":15},
+{"Topic":"Experimental Animated / Generative Typography","OriginalOrder":10,"Max Dodziuk":6,"Nat":8,"fred":4,"cam":15,"elaine":14,"kamai":14,"saskia":27,"alyssa":18,"akis":27,"Jess":27,"julia":25,"revans":24},
+{"Topic":"Programmatic Graphic Design","OriginalOrder":11,"Max Dodziuk":8,"Nat":1,"fred":25,"cam":14,"elaine":16,"kamai":27,"saskia":24,"alyssa":24,"akis":28,"Jess":26,"julia":21,"revans":6},
+{"Topic":"GLSL Shaders","OriginalOrder":12,"Max Dodziuk":11,"Nat":2,"fred":6,"cam":25,"elaine":9,"kamai":5,"saskia":15,"alyssa":26,"akis":6,"Jess":3,"julia":16,"revans":18},
+{"Topic":"AI art","OriginalOrder":13,"Max Dodziuk":19,"Nat":17,"fred":27,"cam":3,"elaine":1,"kamai":1,"saskia":1,"alyssa":2,"akis":2,"Jess":16,"julia":10,"revans":19},
+{"Topic":"Style transfer","OriginalOrder":14,"Max Dodziuk":2,"Nat":11,"fred":9,"cam":9,"elaine":6,"kamai":17,"saskia":0,"alyssa":1,"akis":1,"Jess":12,"julia":11,"revans":4},
+{"Topic":"Diffusion models","OriginalOrder":15,"Max Dodziuk":17,"Nat":14,"fred":2,"cam":24,"elaine":22,"kamai":7,"saskia":7,"alyssa":15,"akis":21,"Jess":15,"julia":22,"revans":10},
+{"Topic":"Deepfakes","OriginalOrder":16,"Max Dodziuk":22,"Nat":29,"fred":19,"cam":17,"elaine":4,"kamai":8,"saskia":14,"alyssa":10,"akis":23,"Jess":14,"julia":3,"revans":20},
+{"Topic":"Current Events","OriginalOrder":17,"Max Dodziuk":24,"Nat":19,"fred":10,"cam":11,"elaine":2,"kamai":15,"saskia":3,"alyssa":4,"akis":7,"Jess":6,"julia":26,"revans":0},
+{"Topic":"AI agents","OriginalOrder":18,"Max Dodziuk":26,"Nat":20,"fred":5,"cam":4,"elaine":12,"kamai":18,"saskia":6,"alyssa":16,"akis":18,"Jess":25,"julia":1,"revans":27},
+{"Topic":"LLMs","OriginalOrder":19,"Max Dodziuk":15,"Nat":10,"fred":8,"cam":13,"elaine":11,"kamai":20,"saskia":4,"alyssa":11,"akis":19,"Jess":13,"julia":15,"revans":26},
+{"Topic":"Data mining","OriginalOrder":20,"Max Dodziuk":27,"Nat":24,"fred":3,"cam":20,"elaine":24,"kamai":26,"saskia":13,"alyssa":9,"akis":24,"Jess":19,"julia":2,"revans":7},
+{"Topic":"Anonymity online","OriginalOrder":21,"Max Dodziuk":7,"Nat":3,"fred":7,"cam":5,"elaine":10,"kamai":3,"saskia":17,"alyssa":8,"akis":11,"Jess":10,"julia":0,"revans":2},
+{"Topic":"Running LLMs Locally","OriginalOrder":22,"Max Dodziuk":3,"Nat":0,"fred":26,"cam":1,"elaine":3,"kamai":4,"saskia":25,"alyssa":13,"akis":5,"Jess":7,"julia":17,"revans":17},
+{"Topic":"Running a search interface locally","OriginalOrder":23,"Max Dodziuk":4,"Nat":21,"fred":15,"cam":2,"elaine":18,"kamai":11,"saskia":8,"alyssa":14,"akis":3,"Jess":4,"julia":6,"revans":29},
+{"Topic":"Phone farms","OriginalOrder":24,"Max Dodziuk":16,"Nat":18,"fred":11,"cam":23,"elaine":8,"kamai":2,"saskia":12,"alyssa":27,"akis":13,"Jess":22,"julia":5,"revans":3},
+{"Topic":"Misinformation","OriginalOrder":25,"Max Dodziuk":23,"Nat":6,"fred":23,"cam":18,"elaine":15,"kamai":6,"saskia":11,"alyssa":3,"akis":17,"Jess":23,"julia":19,"revans":1},
+{"Topic":"Collaborative websites / software","OriginalOrder":26,"Max Dodziuk":13,"Nat":12,"fred":16,"cam":10,"elaine":19,"kamai":23,"saskia":26,"alyssa":23,"akis":22,"Jess":21,"julia":14,"revans":12},
+{"Topic":"Creating small apps","OriginalOrder":27,"Max Dodziuk":14,"Nat":7,"fred":28,"cam":6,"elaine":23,"kamai":29,"saskia":18,"alyssa":20,"akis":16,"Jess":18,"julia":8,"revans":28},
+{"Topic":"Location-based work","OriginalOrder":28,"Max Dodziuk":20,"Nat":5,"fred":18,"cam":7,"elaine":21,"kamai":24,"saskia":20,"alyssa":17,"akis":10,"Jess":8,"julia":20,"revans":14},
+{"Topic":"Digital responsibility","OriginalOrder":29,"Max Dodziuk":21,"Nat":4,"fred":17,"cam":8,"elaine":20,"kamai":16,"saskia":16,"alyssa":7,"akis":8,"Jess":28,"julia":13,"revans":5},
+{"Topic":"VIBECODING","OriginalOrder":30,"Max Dodziuk":25,"Nat":22,"fred":13,"cam":22,"elaine":7,"kamai":21,"saskia":5,"alyssa":12,"akis":9,"Jess":29,"julia":18,"revans":9}
+]};
+
+/* === State === */
+const defaultVisible = new Set(["Pin","Topic","Total","Avg","AvgRank (1=best)","Stdev","Range"]);
+const participantNames = [...RAW.participants];
+const baseRows = RAW.rows;
+let state = {
+  search: "",
+  topN: null,
+  minTotal: null,
+  maxTotal: null,
+  sortBy: "Total",
+  sortDir: "desc",
+  heatmap: false,
+  normalize: false,
+  visibleCols: new Set(defaultVisible),
+  include: new Map(participantNames.map(n => [n, 1])),
+  pins: new Set(),
+  matrixOrder: [...participantNames],
+  matrixSortByStudent: null, // when set, matrix topic labels reorder by this student's scores
+};
+
+/* === Utils === */
+function fmt(n){ return Number.isInteger(n) ? String(n) : n.toFixed(2); }
+function sum(a){ return a.reduce((x,y)=>x+y,0); }
+function mean(a){ return a.length? sum(a)/a.length : 0; }
+function stdev(a){ if(!a.length) return 0; const m=mean(a); return Math.sqrt(mean(a.map(x=>(x-m)*(x-m)))); }
+function rankFromPoints(p){ return 31 - p; }
+function ordinal(k){ return k===1?"1st":k===2?"2nd":k===3?"3rd":k+"th"; }
+
+/* Per-participant z stats for normalization (used only for Total/Avg calc, not top-5) */
+function zTable(){
+  const stats={};
+  for(const n of participantNames){
+    const vals = baseRows.map(r=>r[n]);
+    const m=mean(vals), s=stdev(vals)||1e-9;
+    stats[n]={m,s};
+  }
+  return stats;
+}
+const Z = zTable();
+
+function participantWeights(){ const m={}; for(const n of participantNames){ m[n]=state.include.get(n)??0; } return m; }
+
+/* Compute row aggregates under current settings */
+function computeRowMetrics(r){
+  const wts = participantWeights();
+  let total=0, totalWeight=0, ranks=[], valsUsed=[];
+  for(const n of participantNames){
+    const w = wts[n];
+    if(w<=0) continue;
+    let val = r[n];
+    if(state.normalize){
+      val = (val - Z[n].m) / Z[n].s;
+    }
+    total += val*w;
+    totalWeight += w;
+    ranks.push(rankFromPoints(r[n]));   // rank uses raw points scale (higher points = better)
+    valsUsed.push(r[n]);
+  }
+  const avg = totalWeight ? total/totalWeight : 0;
+  return { Total: total, Avg: avg, AvgRank: mean(ranks), Stdev: stdev(valsUsed), Range: (valsUsed.length? (Math.max(...valsUsed)-Math.min(...valsUsed)) : 0) };
+}
+function enrichRows(){ return baseRows.map(r=>({ ...r, ...computeRowMetrics(r) })); }
+
+/* Overall filtered rows (drives main table & chart; matrix may reorder labels afterward) */
+function filteredRows(){
+  let rows = enrichRows();
+  if(state.search.trim()!==""){
+    const q=state.search.trim().toLowerCase();
+    rows = rows.filter(r=>r.Topic.toLowerCase().includes(q));
+  }
+  if(state.minTotal!=null) rows = rows.filter(r=>r.Total >= state.minTotal);
+  if(state.maxTotal!=null) rows = rows.filter(r=>r.Total <= state.maxTotal);
+
+  const s = state.sortBy, dir = state.sortDir==="asc" ? 1 : -1;
+  rows.sort((a,b)=>{
+    if(s==="Original order") return (a.OriginalOrder-b.OriginalOrder)*dir;
+    if(s==="AvgRank (1=best)") return (a.AvgRank-b.AvgRank)*dir;
+    if(s==="Topic") return a.Topic.localeCompare(b.Topic)*dir;
+    if(["Total","Avg","Stdev","Range"].includes(s)) return (a[s]-b[s])*dir;
+    if(participantNames.includes(s)) return (a[s]-b[s])*dir;
+    return 0;
+  });
+  if(state.topN!=null && state.topN>0) rows = rows.slice(0,state.topN);
+  return rows;
+}
+
+/* === Build Top-5 map (raw per-student) ===
+   For each participant, find their Top-5 topics by points (desc), tiebreak by OriginalOrder. */
+function buildTop5Map(){
+  const m = new Map(); // topic -> array of {name, rank, score}
+  for(const name of participantNames){
+    const sorted = [...baseRows]
+      .map(r => ({topic:r.Topic, score:r[name], ord:r.OriginalOrder}))
+      .sort((a,b)=> (b.score - a.score) || (a.ord - b.ord));
+    const top5 = sorted.slice(0,5);
+    top5.forEach((t,i)=>{
+      if(!m.has(t.topic)) m.set(t.topic, []);
+      m.get(t.topic).push({name, rank:i+1, score:t.score});
+    });
+  }
+  return m;
+}
+const TOP5MAP = buildTop5Map();
+
+/* === UI: Selects/Pills === */
+const sortBySel = document.getElementById("sortBy");
+const sorts = ["Original order","Topic","Total","Avg","AvgRank (1=best)","Stdev","Range", ...participantNames];
+for(const s of sorts){ const o=document.createElement("option"); o.value=s; o.textContent=s; sortBySel.appendChild(o); }
+sortBySel.value = state.sortBy;
+
+function renderIncludePills(){
+  const box=document.getElementById("incPills"); box.innerHTML="";
+  for(const n of participantNames){
+    const pill=document.createElement("div"); pill.className="pill";
+    const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=(state.include.get(n)??0)>0;
+    cb.addEventListener("change", ()=>{ state.include.set(n, cb.checked ? (state.include.get(n)||1) : 0); updateBounds(); renderAll(); });
+    const span=document.createElement("span"); span.textContent=n;
+    const wt=document.createElement("input"); wt.type="number"; wt.step="0.1"; wt.min="0"; wt.value=state.include.get(n)??1; wt.style.width="60px";
+    wt.addEventListener("change", ()=>{ const v=Number(wt.value); state.include.set(n, isNaN(v)?0:v); updateBounds(); renderAll(); });
+    const wlabel=document.createElement("span"); wlabel.className="muted small"; wlabel.textContent="w:";
+    pill.appendChild(cb); pill.appendChild(span); pill.appendChild(wlabel); pill.appendChild(wt); box.appendChild(pill);
+  }
+}
+
+const allCols = ["Pin","Topic","Total","Avg","AvgRank (1=best)","Stdev","Range", ...participantNames];
+function renderColPills(){
+  const box=document.getElementById("colPills"); box.innerHTML="";
+  for(const c of allCols){
+    const pill=document.createElement("label"); pill.className="pill";
+    const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=state.visibleCols.has(c);
+    cb.addEventListener("change", ()=>{ if(cb.checked) state.visibleCols.add(c); else state.visibleCols.delete(c); renderTable(); });
+    const span=document.createElement("span"); span.textContent=c;
+    pill.appendChild(cb); pill.appendChild(span); box.appendChild(pill);
+  }
+}
+
+/* === Main Table & Chart === */
+const thead = document.getElementById("thead");
+const tbody = document.getElementById("tbody");
+function heatColor(val){
+  const p = Math.max(0, Math.min(30, val)) / 30;
+  const hue = 220 - 220*p;
+  const light = 18 + 32*p;
+  return `hsl(${hue}deg, 70%, ${light}%)`;
+}
+function renderTable(){
+  thead.innerHTML=""; tbody.innerHTML="";
+  const cols=[...state.visibleCols].sort((a,b)=>{ const order={"Pin":0,"Topic":1}; const av=(a in order)?order[a]:100+allCols.indexOf(a); const bv=(b in order)?order[b]:100+allCols.indexOf(b); return av-bv; });
+
+  const trh=document.createElement("tr");
+  for(const c of cols){ const th=document.createElement("th"); th.textContent=c; trh.appendChild(th); }
+  thead.appendChild(trh);
+
+  const rows=filteredRows();
+  for(const r of rows){
+    const tr=document.createElement("tr");
+    for(const c of cols){
+      const td=document.createElement("td");
+      if(c==="Pin"){
+        td.className="num";
+        const star=document.createElement("span");
+        star.textContent = state.pins.has(r.Topic) ? "★" : "☆";
+        star.className = "pin " + (state.pins.has(r.Topic) ? "on" : "");
+        star.addEventListener("click", ()=>{ if(state.pins.has(r.Topic)) state.pins.delete(r.Topic); else state.pins.add(r.Topic); renderTable(); renderCompare(); renderMatrix(); });
+        td.appendChild(star);
+      } else if(c==="Topic"){
+        td.className="topic";
+        const top5 = (TOP5MAP.get(r.Topic)||[]).map(t => `${t.name} (#${t.rank})`).join(", ");
+        td.innerHTML = `<div>${r.Topic}</div>
+          <div class="muted small">Total: ${fmt(r.Total)} • Avg: ${fmt(r.Avg)} • AvgRank: ${fmt(r.AvgRank)} • σ: ${fmt(r.Stdev)} • Range: ${fmt(r.Range)}</div>
+          <div class="muted small">${top5 ? `Top-5 picks: ${top5}` : "Top-5 picks: —"}</div>`;
+      } else if(["Total","Avg","Stdev","Range"].includes(c)){
+        td.className="num"; td.textContent=fmt(r[c]);
+      } else if(c==="AvgRank (1=best)"){
+        td.className="num"; td.textContent=fmt(r.AvgRank);
+      } else if(participantNames.includes(c)){
+        const v=r[c]; td.className="num"; td.textContent=v; if(state.heatmap){ td.style.background=heatColor(v); }
+      }
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+  renderChart(rows);
+}
+
+/* Chart (unchanged) */
+const chart=document.getElementById("chart");
+function renderChart(rows){
+  const pad={t:10,r:16,b:10,l:180};
+  const barH=22, gap=6, n=rows.length;
+  const H = pad.t + pad.b + n*(barH+gap) + 6;
+  const totals = rows.map(r=>r.Total);
+  const min = Math.min(...totals, 0), max = Math.max(...totals, 1);
+  const W = chart.clientWidth || 1000;
+  const scale = x => pad.l + ((x-min)/(max-min || 1)) * (W-pad.l-pad.r);
+
+  chart.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  chart.innerHTML="";
+
+  const axis=document.createElementNS("http://www.w3.org/2000/svg","line");
+  axis.setAttribute("x1",pad.l); axis.setAttribute("x2",W-pad.r);
+  axis.setAttribute("y1",pad.t); axis.setAttribute("y2",pad.t);
+  axis.setAttribute("stroke","#2b3445"); axis.setAttribute("stroke-width","1");
+  chart.appendChild(axis);
+
+  rows.forEach((r,i)=>{
+    const y=pad.t + i*(barH+gap) + 6;
+    const g=document.createElementNS("http://www.w3.org/2000/svg","g");
+
+    const lab=document.createElementNS("http://www.w3.org/2000/svg","text");
+    lab.setAttribute("x",8); lab.setAttribute("y",y+22*0.75); lab.setAttribute("fill","#a6b3c2"); lab.setAttribute("font-size","12");
+    lab.textContent = r.Topic.length>45 ? r.Topic.slice(0,42)+"…" : r.Topic; g.appendChild(lab);
+
+    const x0=scale(0), x1=scale(r.Total);
+    const rect=document.createElementNS("http://www.w3.org/2000/svg","rect");
+    rect.setAttribute("x",Math.min(x0,x1)); rect.setAttribute("y",y);
+    rect.setAttribute("width",Math.max(4,Math.abs(x1-x0))); rect.setAttribute("height",22);
+    rect.setAttribute("rx","6"); rect.setAttribute("ry","6");
+    rect.setAttribute("fill","#f6b73c");
+    g.appendChild(rect);
+
+    const val=document.createElementNS("http://www.w3.org/2000/svg","text");
+    val.setAttribute("x",Math.max(x0,x1)+6); val.setAttribute("y",y+22*0.75);
+    val.setAttribute("fill","#e9eef7"); val.setAttribute("font-size","12");
+    val.textContent = fmt(r.Total);
+    g.appendChild(val);
+
+    chart.appendChild(g);
+  });
+}
+document.getElementById("downloadSVG").addEventListener("click", ()=>{
+  const s=new XMLSerializer().serializeToString(chart);
+  const blob=new Blob([s],{type:"image/svg+xml"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download="topic_points_chart.svg";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+
+/* === Compare / Pins === */
+function renderCompare(){
+  const body=document.getElementById("compareBody");
+  const count=document.getElementById("pinCount");
+  const pins=[...state.pins];
+  count.textContent=`${pins.length} pinned`;
+  body.innerHTML="";
+  if(pins.length===0){ body.innerHTML='<div class="note">No topics pinned yet.</div>'; return; }
+
+  const table=document.createElement("table"); table.style.width="100%"; table.style.borderCollapse="separate"; table.style.borderSpacing="0";
+  const thead=document.createElement("thead"); const thr=document.createElement("tr");
+  ["Topic","Total","Avg","AvgRank (1=best)","Stdev","Range", ...participantNames].forEach(h=>{
+    const th=document.createElement("th"); th.textContent=h; th.style.padding="6px 8px"; th.style.fontSize="12px"; th.style.color="var(--muted)"; th.style.textAlign=(participantNames.includes(h)?"right":"left");
+    thr.appendChild(th);
+  });
+  thead.appendChild(thr); table.appendChild(thead);
+
+  const tbody=document.createElement("tbody");
+  const rows=enrichRows().filter(r => state.pins.has(r.Topic));
+  for(const r of rows){
+    const tr=document.createElement("tr");
+    function td(v,num=false){ const d=document.createElement("td"); d.textContent=num?fmt(v):v; d.style.padding="6px 8px"; d.style.fontSize="12px"; d.style.textAlign=num?"right":"left"; d.style.borderTop="1px solid var(--border)"; return d; }
+    tr.appendChild(td(r.Topic));
+    tr.appendChild(td(r.Total,true));
+    tr.appendChild(td(r.Avg,true));
+    tr.appendChild(td(r.AvgRank,true));
+    tr.appendChild(td(r.Stdev,true));
+    tr.appendChild(td(r.Range,true));
+    for(const n of participantNames){ tr.appendChild(td(r[n],true)); }
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+  body.appendChild(table);
+
+  if(pins.length===2){
+    const [A,B]=pins;
+    const arow=enrichRows().find(r=>r.Topic===A);
+    const brow=enrichRows().find(r=>r.Topic===B);
+    let aWins=0,bWins=0,ties=0;
+    for(const n of participantNames){
+      const av=arow[n], bv=brow[n];
+      if(av>bv) aWins++; else if(bv>av) bWins++; else ties++;
+    }
+    const div=document.createElement("div"); div.className="note"; div.style.marginTop="8px";
+    div.textContent=`Head-to-head (${A} vs ${B}) — ${A}: ${aWins} wins, ${B}: ${bWins} wins, ties: ${ties}`;
+    body.appendChild(div);
+  }
+}
+document.getElementById("clearPins").addEventListener("click", ()=>{ state.pins.clear(); renderTable(); renderCompare(); renderMatrix(); });
+
+/* === Matrix rendering (with click-to-reorder by student) === */
+const matrixHead = document.getElementById("matrixHead");
+const matrixBody = document.getElementById("matrixBody");
+
+function renderMatrix(){
+  matrixHead.innerHTML=""; matrixBody.innerHTML="";
+
+  // build current base order from filtered rows (used as stable tiebreaker)
+  const baseList = filteredRows();
+  const baseIndex = new Map(baseList.map((r,i)=>[r.Topic, i]));
+
+  // header
+  const headRow = document.createElement("tr");
+  const thTopic = document.createElement("th");
+  thTopic.textContent = "Topic";
+  thTopic.className = "stickyTopic";
+  headRow.appendChild(thTopic);
+
+  const order = state.matrixOrder.slice();
+  for(const name of order){
+    const th = document.createElement("th");
+    th.textContent = name;
+    th.title = "Click to bring to leftmost and reorder topics by this student";
+    th.style.cursor = "pointer";
+    th.addEventListener("click", () => {
+      state.matrixOrder = [name, ...state.matrixOrder.filter(n => n !== name)];
+      state.matrixSortByStudent = name; // only the most recently clicked student drives the label reorder
+      renderMatrix();
+    });
+    headRow.appendChild(th);
+  }
+  matrixHead.appendChild(headRow);
+
+  // rows (start from filteredRows, then optionally reorder by selected student)
+  let rows = filteredRows();
+
+  if(state.matrixSortByStudent){
+    const n = state.matrixSortByStudent;
+    rows = [...rows].sort((a,b)=>{
+      const dv = (b[n] - a[n]);                   // primary: clicked student's score desc
+      if(dv) return dv;
+      return (baseIndex.get(a.Topic) - baseIndex.get(b.Topic)); // tie-break: overall filtered order
+    });
+  }
+
+  // draw rows
+  for(const r of rows){
+    const tr = document.createElement("tr");
+    const tdTopic = document.createElement("td");
+    tdTopic.textContent = r.Topic;
+    tdTopic.className = "stickyTopic";
+    tr.appendChild(tdTopic);
+
+    for(const name of order){
+      const td = document.createElement("td");
+      td.className = "num";
+      const v = r[name];
+      td.textContent = v;
+      if(state.heatmap) td.style.background = heatColor(v);
+      tr.appendChild(td);
+    }
+    matrixBody.appendChild(tr);
+  }
+}
+
+/* === Export CSV === */
+function exportCSV(){
+  const rows=filteredRows();
+  const cols=[...state.visibleCols].sort((a,b)=>{ const order={"Pin":0,"Topic":1}; const av=(a in order)?order[a]:100+allCols.indexOf(a); const bv=(b in order)?order[b]:100+allCols.indexOf(b); return av-bv; });
+  const header=cols.join(",");
+  const lines=[header];
+  for(const r of rows){
+    const vals=cols.map(c=>{
+      let v=r[c];
+      if(c==="AvgRank (1=best)") v=r.AvgRank;
+      if(["Total","Avg","Stdev","Range"].includes(c)) v=r[c];
+      if(c==="Pin") v=state.pins.has(r.Topic)?"1":"0";
+      if(participantNames.includes(c)) v=r[c];
+      if(c==="Topic") return '"' + r.Topic.replace(/"/g,'""') + '"';
+      return typeof v==="number" ? v : (v ?? "");
+    });
+    lines.push(vals.join(","));
+  }
+  const csv=lines.join("\\n");
+  const blob=new Blob([csv],{type:"text/csv"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download="topic_points_filtered.csv";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+document.getElementById("exportCsv").addEventListener("click", exportCSV);
+
+/* === Bounds & Presets === */
+function updateBounds(){
+  const totals=enrichRows().map(r=>r.Total);
+  const lo=Math.floor(Math.min(...totals)), hi=Math.ceil(Math.max(...totals));
+  const minInput=document.getElementById("minTotal");
+  const maxInput=document.getElementById("maxTotal");
+  if(state.minTotal===null) state.minTotal=lo;
+  if(state.maxTotal===null) state.maxTotal=hi;
+  minInput.value=state.minTotal; maxInput.value=state.maxTotal;
+}
+document.getElementById("preset").addEventListener("change", e=>{
+  const v=e.target.value;
+  if(v==="consensus"){ state.sortBy="Stdev"; state.sortDir="asc"; }
+  else if(v==="divisive"){ state.sortBy="Stdev"; state.sortDir="desc"; }
+  else if(v==="topTotal"){ state.sortBy="Total"; state.sortDir="desc"; }
+  else if(v==="topAvg"){ state.sortBy="Avg"; state.sortDir="desc"; }
+  document.getElementById("sortBy").value=state.sortBy;
+  document.getElementById("sortDir").value=state.sortDir;
+  renderAll();
+});
+
+/* === Save / Load view (includes matrix sort state) === */
+function saveView(){
+  const payload={
+    search:state.search, topN:state.topN, minTotal:state.minTotal, maxTotal:state.maxTotal,
+    sortBy:state.sortBy, sortDir:state.sortDir, heatmap:state.heatmap, normalize:state.normalize,
+    visibleCols:[...state.visibleCols], include:[...state.include.entries()], pins:[...state.pins],
+    matrixOrder:[...state.matrixOrder], matrixSortByStudent: state.matrixSortByStudent
+  };
+  localStorage.setItem("topic_points_view_v4", JSON.stringify(payload));
+  alert("View saved.");
+}
+function loadView(){
+  const s=localStorage.getItem("topic_points_view_v4");
+  if(!s){ alert("No saved view."); return; }
+  try{
+    const v=JSON.parse(s);
+    state.search=v.search??""; state.topN=v.topN??null; state.minTotal=v.minTotal??null; state.maxTotal=v.maxTotal??null;
+    state.sortBy=v.sortBy??"Total"; state.sortDir=v.sortDir??"desc"; state.heatmap=!!v.heatmap; state.normalize=!!v.normalize;
+    state.visibleCols=new Set(v.visibleCols??[...defaultVisible]);
+    state.include=new Map(v.include??participantNames.map(n=>[n,1]));
+    state.pins=new Set(v.pins??[]);
+    state.matrixOrder = v.matrixOrder ?? [...participantNames];
+    state.matrixSortByStudent = v.matrixSortByStudent ?? null;
+    document.getElementById("search").value=state.search;
+    document.getElementById("topN").value=state.topN??"";
+    document.getElementById("minTotal").value=state.minTotal??"";
+    document.getElementById("maxTotal").value=state.maxTotal??"";
+    document.getElementById("sortBy").value=state.sortBy;
+    document.getElementById("sortDir").value=state.sortDir;
+    document.getElementById("heatmap").checked=state.heatmap;
+    document.getElementById("normalize").checked=state.normalize;
+    renderIncludePills(); renderColPills(); renderAll();
+  }catch(err){ alert("Failed to load view."); }
+}
+function clearView(){ localStorage.removeItem("topic_points_view_v4"); alert("Cleared."); }
+document.getElementById("saveView").addEventListener("click", saveView);
+document.getElementById("loadView").addEventListener("click", loadView);
+document.getElementById("clearView").addEventListener("click", clearView);
+
+/* === Wire inputs === */
+document.getElementById("search").addEventListener("input", e=>{ state.search=e.target.value; renderAll(); });
+document.getElementById("topN").addEventListener("change", e=>{ const v=Number(e.target.value); state.topN=isNaN(v)||v<=0?null:v; renderAll(); });
+document.getElementById("minTotal").addEventListener("change", e=>{ const v=e.target.value; state.minTotal=v===""?null:Number(v); renderAll(); });
+document.getElementById("maxTotal").addEventListener("change", e=>{ const v=e.target.value; state.maxTotal=v===""?null:Number(v); renderAll(); });
+document.getElementById("sortBy").addEventListener("change", e=>{ state.sortBy=e.target.value; renderAll(); });
+document.getElementById("sortDir").addEventListener("change", e=>{ state.sortDir=e.target.value; renderAll(); });
+document.getElementById("heatmap").addEventListener("change", e=>{ state.heatmap=e.target.checked; renderTable(); renderMatrix(); });
+document.getElementById("normalize").addEventListener("change", e=>{ state.normalize=e.target.checked; updateBounds(); renderAll(); });
+document.getElementById("reset").addEventListener("click", ()=>{
+  state = {
+    search:"", topN:null, minTotal:null, maxTotal:null,
+    sortBy:"Total", sortDir:"desc", heatmap:false, normalize:false,
+    visibleCols:new Set(defaultVisible), include:new Map(participantNames.map(n=>[n,1])),
+    pins:new Set(), matrixOrder:[...participantNames], matrixSortByStudent:null,
+  };
+  document.getElementById("search").value="";
+  document.getElementById("topN").value="";
+  document.getElementById("sortBy").value=state.sortBy;
+  document.getElementById("sortDir").value=state.sortDir;
+  document.getElementById("heatmap").checked=false;
+  document.getElementById("normalize").checked=false;
+  renderIncludePills(); renderColPills(); updateBounds(); renderAll();
+});
+
+/* === Render orchestration === */
+function renderAll(){ renderTable(); renderCompare(); renderMatrix(); }
+(function init(){
+  document.getElementById("sortBy").value=state.sortBy;
+  document.getElementById("sortDir").value=state.sortDir;
+  renderIncludePills(); renderColPills(); updateBounds(); renderAll();
+})();
+</script>
+</body>
+</html>
