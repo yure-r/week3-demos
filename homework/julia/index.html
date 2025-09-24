@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <Title> Explaining A Site </Title>
+         <link rel='stylesheet' href='style.css'>
+    </head>
+    <body style="margin: 100px">
+        <div id="Title" style="text-align: center;">
+            <h1>Understanding "ESA Star Mapper" - Apparent Magnitude</h1>
+            <h3>Julia Solines</h3>
+            <img src="https://scx2.b-cdn.net/gfx/news/2019/galaxy.jpg" width="1300" height="400" alt="Galaxy"><br>
+
+        </div>
+        <div id="intro" style="text-align: center;"> 
+            ESA Star Mapper is visualisation is an exploration of some central aspects of astrometric star catalogues, 
+            using data from ESA’s 1989 Hipparcos mission. This catalogue listed 117 955 stars, reporting their positions 
+            with unprecedented accuracy, alongside estimates of their distance from us and motions through the Galaxy. It 
+            was a huge advance on the best catalogues compiled from ground-based observations, which contained information 
+            for just over 8000 stars.<br><br>This interactive experience allows users to delve into this famous dataset, 
+            exploring the three-dimensional distribution of almost 60 000 stars from the Hipparcos Catalogue. Stars are visualised 
+            as a function of their brightness; it is also possible to show their colours, as well as names and parent constellations 
+            for the brightest stars. Users can get a sense of where in the sky stars were located in the past – or will be in the future
+            – based on their motions measured by Hipparcos. <a href='https://sci.esa.int/star_mapper/' target='_blank'>Check it out!</a>.  
+        </div> 
+        <div id="head">
+            <h2>Head</h2>
+            <p>"html class=no-js lang".</p>
+                <ul>
+                    <li>"class= no-js" means that JavaScript us not active in this Website.</li>
+                    <li>"lang" is probably an incomplete term, because lang shuld be followed 
+                        with "en", the language the site is written in. </li>
+                </ul>
+            <p>head</p>
+                <ul>
+                    <li> title tag: ESA Star Mapper meta tags: important information about the site that is not 
+                        displayed. Info like author, title, description, viewport, and device. </li>
+                    <li>meta tags: important information about the site that is not displayed. 
+                        Info like author, title, description, viewport, and device. </li>
+                    <li>link tags: inserting the logos. </li>
+                    <li>script tag: inserts javascript file. </li>
+                </ul>
+        </div>
+        <div id="body">
+            <h2>Body</h2>
+            <ul>
+                <li>Margin, padding, background color.<br>This defines the formatting 
+                    of the main page. </li><br>
+                <li>Canvas. <br>A simple solid color rectangle.</li><br>
+                <li>Star names.<br>Individual code that names each of the stars when the 
+                    "star name" button is enabled. </li><br>
+                <li>hr labels.<br>Thematic break that separates content in the page</li>
+                <li>Buttons and slider<br>A division within the code that include all the buttons for the site.
+                It also includes the slidebar in the bottom that allows the viewer to adjust the 
+                apparent magnitude.</li><br>
+                <iframe src="https://drive.google.com/file/d/1D2pphBrUyjKLpORB-LQzsIVEcijciesY/preview" 
+                    width="640" height="480" allow="autoplay"></iframe>
+                <li>Images and logos.<br>The logos of the page.</li><br>
+            </ul>
+        </div>
+        <div id="Java">
+            <h2>JavaScript</h2>
+            <p>Each star was drawn separately as spheres, each with their own ID and starting coordinate. The JS 
+                code has multiple functions that react to the mouse movement in relation to the coordinates and
+                size of the stars and the "Distance from the Sun: xxx light years" heading.</p>
+            </p>
+            <iframe src="https://drive.google.com/file/d/1tetgmJQtcdVTe7sRMriuk0bTqti0iLFC/preview" 
+            width="640" height="480" allow="autoplay"></iframe>
+            <p>The image above shows the code used for reactions to the mouse movements. 
+                It assigned a different value to each movement (mouseup or touchstart for example)
+                and then later on these values are used to deliver the value and either move the background image
+                around or to enlarge the plotted stars.
+            </p><br>
+            <iframe src="https://drive.google.com/file/d/1MvPTGZMoie8gJpjsYWO4Xa8S0tQWudNa/preview" width="640" height="480" allow="autoplay"></iframe>
+            <iframe src="https://drive.google.com/file/d/1Jl-vnDGVhVBW0PYD7hWhYYxJuJevP3LE/preview" width="640" height="480" allow="autoplay"></iframe>
+            <p>The image on the left represents the stars and background image when the mouse is in the lower quarter of the trackpad. 
+                The image to the right represents the stars and background when the mouse is at the top of the trackpad. 
+            </p>
+        </div>
+        
+    </body>
+</html>

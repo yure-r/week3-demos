@@ -1,0 +1,14 @@
+/* Reset all text colors and font */
+* {
+    color: antiquewhite;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Set background color on the body */
+body {
+    background-color: black;
+}
+
+a{
+    color:yellow;
+}
